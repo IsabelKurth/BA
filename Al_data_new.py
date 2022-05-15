@@ -7,7 +7,7 @@ al_data = pd.read_csv('AL.csv')
 al_water = pd.read_csv('dhs_final_labels.csv')
 # print(al_water.iloc[1300])
 
-al_water.to_pickle("C:\\Users\\isabe\\Documents\\BA_sustainbench\\BA_sustainbench\\AL_water.pkl")
+al_water.to_pickle("C:\\Users\\isabe\\Documents\\BA\\BA\\AL_water.pkl")
 
 
 """

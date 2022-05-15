@@ -5,8 +5,8 @@ import pandas as pd
 import os 
 
 # all satellite images for AL 2005 
-folder_AL_2008 = "C:\\Users\\isabe\\Documents\\BA_sustainbench\\BA_sustainbench\\DHS_Data\\AL-2008-5#"
-folder_AL_2017 = "C:\\Users\\isabe\\Documents\\BA_sustainbench\\BA_sustainbench\\DHS_Data\\AL-2017-7#"
+folder_AL_2008 = "C:\\Users\\isabe\\Documents\\BA\\BA\\DHS_Data\\AL-2008-5#"
+folder_AL_2017 = "C:\\Users\\isabe\\Documents\\BA\\BA\\DHS_Data\\AL-2017-7#"
 """
 # understand the data 
 dic_data =  np.load('DHS_Data/AL-2008-5#/AL-2008-5#-00000026.npz')
@@ -75,6 +75,6 @@ for item in list_files(folder_AL_2017):
 df_satellite_AL = pd.concat([df_satellite_AL_2008, df_satellite_AL_2017])
 """
 
-df_satellite_AL_2008.to_pickle("C:\\Users\\isabe\\Documents\\BA_sustainbench\\BA_sustainbench\\AL_satellite_2008.pkl")
+df_satellite_AL_2008.to_pickle("C:\\Users\\isabe\\Documents\\BA\\BA\\AL_satellite_2008.pkl")
 #df_satellite_AL_2017.to_pickle("C:\\Users\\isabe\\Documents\\BA_sustainbench\\BA_sustainbench\\AL_satellite_2017.pkl")
 #df_satellite_AL.to_pickle("C:\\Users\\isabe\\Documents\\BA_sustainbench\\BA_sustainbench\\AL_satellite.pkl")
