@@ -22,6 +22,27 @@ def list_files(dir):
                 r.append(os.path.join(subdir, file))                                                                         
     return r  
 
+"""
+example one image: 
+
+dic_data =  np.load('DHS_Data/AL-2008-5#/AL-2008-5#-00000026.npz')
+image_data = dic_data[dic_data.files[0]]
+print(dic_data.files)
+print(image_data)
+print(image_data.shape)
+# 255x255x8px satellite image 
+# bands: blue, green, red, infrared, infrared 2, thermal, near infrared, nightlights 
+
+# blue 
+print(np.mean(image_data[0,:,:]))
+# green
+print(image_data[1,:,:])
+# red 
+print(image_data[2,:,:])
+
+print(image_data[0,:,:].shape)
+"""
+
 # AL 2008 data 
 for item in list_files(folder_AL_2008):
     list_data = np.load(item)

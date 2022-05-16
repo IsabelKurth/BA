@@ -12,6 +12,13 @@ data_satellite = pd.read_pickle('AL_2008_finish_satellite.pkl')
 data_street = pd.read_pickle('AL_2008_finish_street.pkl')
 data_street = data_street.iloc[1:,:]
 data_satellite = data_satellite.iloc[1:,:]
+print(data_street.head())
+print(data_satellite.head())
+
+data_joined = pd.merge(data_street, data_satellite, how="left", on=['DHSID_EA'])
+data_joined.drop('water_index_x', axis=1, inplace=True)
+data_joined.columns = ['DHSID_EA', 'red_street', 'green_street', 'blue_street', 'red_satellite', 'green_satellite', 'blue_satellite', 'water_index']
+print(data_joined.head())
 
 data_street_RGB = data_street.iloc[:,1:4]
 data_satellite_RGB = data_satellite.iloc[:,1:4]
