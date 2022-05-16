@@ -12,8 +12,10 @@ df_street = pd.DataFrame(columns=['DHSID_EA', 'red', 'green', 'blue', 'imagename
 index = ['DHSID_EA'])
 
 
-# TO DO: create folder with all downloaded countries 
-folder_dir = "C:\\Users\\isabe\\Documents\\BA\\BA\\AL"
+# folder with all downloaded countries 
+folder_dir = "C:\\Users\\isabe\\Documents\\BA\\BA\\Street_images"
+
+### problem: now two subdirectories down 
 
 def list_files(dir):                                                                                                  
     r = []                                                                                                            
@@ -25,6 +27,7 @@ def list_files(dir):
                 r.append(os.path.join(subdir, file))                                                                         
     return r  
 
+# not possible to call function twice: print(list_files(list_files(folder_dir)))
 
 for image in list_files(folder_dir):
     firstsplit = os.path.split(image)[0]

@@ -74,6 +74,7 @@ print(plot_satellite)
 # avoid cancallation of negative terms 
 # output unit not same as input unit 
 # version: RMSE: rooted 
+# the lower the better 
 
 # 3) R Squared: independant of the context, how much regression line is
 # better than mean line 
