@@ -9,6 +9,7 @@ print(water.shape)
 # get names and years of dropped ones 
 
 water_na_free = water.dropna(subset=['water_index'])
+water.to_pickle("C:\\Users\\isabe\\Documents\\BA\\BA\\water.pkl")
 print(water_na_free.shape)
 
 dropped_rows = water[~water.index.isin(water_na_free.index)]
