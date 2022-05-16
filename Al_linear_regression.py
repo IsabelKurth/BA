@@ -8,6 +8,7 @@ from sklearn.metrics import r2_score
 from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 # load data 
 data_satellite = pd.read_pickle('AL_2008_finish_satellite.pkl')
@@ -59,10 +60,14 @@ predictions_street = model_street.predict(x_test_street)
 
 predictions_satellite = model_satellite.predict(x_test_satellite)
 
-plot_street = plt.scatter(y_test_street, predictions_street)
-plot_satellite = plt.scatter(y_test_satellite, predictions_satellite)
-print(plot_street)
-print(plot_satellite)
+plt.scatter(y_test_street, predictions_street)
+plt.show()
+sns.regplot(x=y_test_street, y= predictions_street, ci=None, color='red')
+plt.show()
+plt.scatter(y_test_satellite, predictions_satellite)
+plt.show()
+sns.regplot(x=y_test_satellite, y= predictions_satellite, ci=None, color='red')
+plt.show()
 
 
 # evaluation metrics 
