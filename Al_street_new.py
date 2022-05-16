@@ -11,7 +11,7 @@ import pathlib
 df_street = pd.DataFrame(columns=['DHSID_EA', 'red', 'green', 'blue', 'imagename'],
 index = ['DHSID_EA'])
 
-folder_dir = "C:\\Users\\isabe\\Documents\\BA\\BA\\AL"
+folder_dir = "C:\\Users\\isabe\\Documents\\BA\\BA\\Street_images\\AL"
 
   
 def list_files(dir):                                                                                                  
