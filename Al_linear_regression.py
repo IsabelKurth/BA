@@ -5,6 +5,8 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 import statsmodels.api as sm 
 from sklearn.metrics import r2_score
+from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
 
 # load data 
@@ -54,12 +56,41 @@ print("Satellite intercept is:", model_satellite.intercept_)
 
 # predict values and evaluate model 
 predictions_street = model_street.predict(x_test_street)
-score_street = r2_score(y_test_street, predictions_street)
-print("Street r2 score", score_street)
 
 predictions_satellite = model_satellite.predict(x_test_satellite)
-score_satellite = r2_score(y_test_satellite, predictions_satellite)
-print("Satellite r2 score", score_satellite)
 
-plt.scatter(y_test_street, predictions_street)
-plt.scatter(y_test_satellite, predictions_satellite)
+plot_street = plt.scatter(y_test_street, predictions_street)
+plot_satellite = plt.scatter(y_test_satellite, predictions_satellite)
+print(plot_street)
+print(plot_satellite)
+
+
+# evaluation metrics 
+# 1) mean absolute error (MAE): absolute difference between actual and predicted values
+# sum all errors and divided by total number of observations 
+# goal: minimum MAE
+
+# 2) mean squared error (MSE): squared difference between actual and predicted value
+# avoid cancallation of negative terms 
+# output unit not same as input unit 
+# version: RMSE: rooted 
+
+# 3) R Squared: independant of the context, how much regression line is
+# better than mean line 
+# if regression line is perfect: 1
+# if 0.8: model is capable to explain 80 percent of the variance of the data 
+MAE_street = mean_absolute_error(y_test_street, predictions_street)
+MSE_street = mean_squared_error(y_test_street, predictions_street)
+score_street = r2_score(y_test_street, predictions_street)
+print("Street MAE is", MAE_street)
+print("Street MSE is", MSE_street)
+print("Street RMSE is", np.sqrt(MSE_street))
+print("Street r2 score", score_street)
+
+MAE_satellite = mean_absolute_error(y_test_satellite, predictions_satellite)
+MSE_satellite = mean_squared_error(y_test_satellite, predictions_satellite)
+score_satellite = r2_score(y_test_satellite, predictions_satellite)
+print("satellite MAE is", MAE_satellite)
+print("satellite MSE is", MSE_satellite)
+print("Satellite RMSE is", np.sqrt(MSE_satellite))
+print("Satellite r2 score", score_satellite)

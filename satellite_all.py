@@ -19,7 +19,7 @@ def list_files(dir):
                 r.append(os.path.join(subdir, file))                                                                         
     return r  
 
-    
+
 print(list_files(folder))    
 
 for item in list_files(folder):
@@ -27,7 +27,7 @@ for item in list_files(folder):
     image_data = list_data[list_data.files[0]]
     firstsplit = (os.path.basename(item))
     id = os.path.splitext(firstsplit)[0]
-    df_satellite_AL_2008 = df_satellite_AL_2008.append({
+    df_satellite = df_satellite.append({
             'DHSID_EA': id, 
             'red':np.mean(image_data[2,:,:]), 
             'green': np.mean(image_data[1,:,:]), 
