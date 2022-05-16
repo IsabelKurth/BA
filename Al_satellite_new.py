@@ -23,12 +23,12 @@ def list_files(dir):
     return r  
 
 """
-example one image: 
+#example one image: 
 
 dic_data =  np.load('DHS_Data/AL-2008-5#/AL-2008-5#-00000026.npz')
 image_data = dic_data[dic_data.files[0]]
-print(dic_data.files)
-print(image_data)
+#print(dic_data.files)
+#print(image_data)
 print(image_data.shape)
 # 255x255x8px satellite image 
 # bands: blue, green, red, infrared, infrared 2, thermal, near infrared, nightlights 
@@ -51,9 +51,9 @@ for item in list_files(folder_AL_2008):
     id = os.path.splitext(firstsplit)[0]
     df_satellite_AL_2008 = df_satellite_AL_2008.append({
             'DHSID_EA': id, 
-            'red':np.mean(image_data[2,:,:]), 
-            'green': np.mean(image_data[1,:,:]), 
-            'blue':np.mean(image_data[0,:,:]),
+            'red':np.mean(np.ndarray.flatten(image_data[2,:,:])), 
+            'green': np.mean(np.ndarray.flatten(image_data[1,:,:])), 
+            'blue':np.mean(np.ndarray.flatten(image_data[0,:,:])),
             'imagename': firstsplit
         }, ignore_index = True)
 
