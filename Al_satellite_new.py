@@ -7,25 +7,6 @@ import os
 # all satellite images for AL 2005 
 folder_AL_2008 = "C:\\Users\\isabe\\Documents\\BA\\BA\\DHS_Data\\AL-2008-5#"
 folder_AL_2017 = "C:\\Users\\isabe\\Documents\\BA\\BA\\DHS_Data\\AL-2017-7#"
-"""
-# understand the data 
-dic_data =  np.load('DHS_Data/AL-2008-5#/AL-2008-5#-00000026.npz')
-image_data = dic_data[dic_data.files[0]]
-print(dic_data.files)
-print(image_data)
-print(image_data.shape)
-# 255x255x8px satellite image 
-# bands: blue, green, red, infrared, infrared 2, thermal, near infrared, nightlights 
-
-# blue 
-print(image_data[0,:,:])
-# green
-print(image_data[1,:,:])
-# red 
-print(image_data[2,:,:])
-
-print(image_data[0,:,:].shape)
-"""
 
 # dataframe to save RGB values and DHSID_EA id 
 df_satellite_AL_2008 = pd.DataFrame(columns=['DHSID_EA', 'red', 'green', 'blue', 'imagename'])
