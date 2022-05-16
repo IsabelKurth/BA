@@ -6,6 +6,9 @@ al_satellite_data = pd.read_pickle('AL_satellite_2008.pkl')
 al_street_data = pd.read_pickle('AL_street_2008.pkl')
 
 # load water index data 
+al_water = pd.read_csv('dhs_final_labels.csv')
+al_water.to_pickle("C:\\Users\\isabe\\Documents\\BA\\BA\\AL_water.pkl")
+al_water = pd.read_csv('dhs_final_labels.csv')
 al_data = pd.read_pickle('AL_water.pkl')
 
 # combine all data for albania
