@@ -22,7 +22,7 @@ def list_files(dir):
                 r.append(os.path.join(subdir, file))                                                                         
     return r  
 
-"""
+
 #example one image: 
 
 dic_data =  np.load('DHS_Data/AL-2008-5#/AL-2008-5#-00000026.npz')
@@ -41,7 +41,7 @@ print(image_data[1,:,:])
 print(image_data[2,:,:])
 
 print(image_data[0,:,:].shape)
-"""
+
 
 # AL 2008 data 
 for item in list_files(folder_AL_2008):

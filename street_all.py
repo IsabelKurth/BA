@@ -27,7 +27,8 @@ def list_files(dir):
                 r.append(os.path.join(subdir, file))                                                                         
     return r  
 
-# not possible to call function twice: print(list_files(list_files(folder_dir)))
+# not possible to call function twice: 
+print(list_files(list_files(folder_dir)))
 
 for image in list_files(folder_dir):
     firstsplit = os.path.split(image)[0]
