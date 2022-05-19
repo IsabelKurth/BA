@@ -4,6 +4,8 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.preprocessing import KBinsDiscretizer
+from sklearn.metrics import confusion_matrix, accuracy_score
 
 # load data
 data_satellite = pd.read_pickle('AL_2008_finish_satellite.pkl')
@@ -37,9 +39,16 @@ x_test_street = scaler.transform(x_train_street)
 print(x_train_street)
 print(y_train_street)
 
+y_train_street = np.digitize(y_train_street, [1, 2, 3, 4, 5])
+y_test_street = np.digitize(y_test_street, [1, 2, 3, 4, 5]) 
+print(y_train_street)
+
 # training and predictions 
 classifier = KNeighborsClassifier(n_neighbors=5)
 classifier.fit(x_train_street, y_train_street)
 
-#y_pred = classifier.predict(x_test_street)
-
+y_pred = classifier.predict(x_test_street)
+cm = confusion_matrix(y_test_street, y_pred)
+ac = accuracy_score(y_test_street, y_pred)
+print(cm)
+print(ac)
