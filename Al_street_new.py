@@ -24,6 +24,8 @@ def list_files(dir):
                 r.append(os.path.join(subdir, file))                                                                         
     return r  
 
+#ex_image = asarray(Image.open("C:\\Users\\isabe\\Documents\\BA\\BA\\Street_images\\AL\\AL-2008-5#-00000105\\138149814963930.jpeg"))
+#print(np.mean(np.ndarray.flatten(ex_image[:,:,0])))
 
 for image in list_files(folder_dir):
     firstsplit = os.path.split(image)[0]
