@@ -3,6 +3,8 @@ from numpy import asarray
 import scipy.sparse
 import pandas as pd 
 import os 
+import pickle
+
 
 # all satellite images 
 folder = "C:\\Users\\isabe\\Documents\\BA\\BA\\DHS_Data"
@@ -24,12 +26,15 @@ print(list_files(folder))
 
 for item in list_files(folder):
     list_data = np.load(item)
+    # not working: 
+    #with open (item, "rb") as f: 
+    #    list_data = pickle.load(f)
     image_data = list_data[list_data.files[0]]
     firstsplit = (os.path.basename(item))
     id = os.path.splitext(firstsplit)[0]
     df_satellite = df_satellite.append({
             'DHSID_EA': id, 
-            'red':np.multiply(np.mean(image_data[2,:,:], 255)), 
+            'red':np.mean(image_data[2,:,:]), 
             'green': np.mean(image_data[1,:,:]), 
             'blue':np.mean(image_data[0,:,:]),
             'imagename': firstsplit
