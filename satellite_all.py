@@ -22,10 +22,10 @@ def list_files(dir):
     return r  
 
 
-print(list_files(folder))    
+# print(list_files(folder))    
 
 for item in list_files(folder):
-    list_data = np.load(item)
+    list_data = np.load(item, allow_pickle = True)
     # not working: 
     #with open (item, "rb") as f: 
     #    list_data = pickle.load(f)
@@ -40,4 +40,5 @@ for item in list_files(folder):
             'imagename': firstsplit
         }, ignore_index = True)
 
+print(df_satellite.head())
 df_satellite.to_pickle("C:\\Users\\isabe\\Documents\\BA\\BA\\satellite_all.pkl")        

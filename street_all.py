@@ -15,8 +15,6 @@ index = ['DHSID_EA'])
 # folder with all downloaded countries 
 folder_dir = "C:\\Users\\isabe\\Documents\\BA\\BA\\Street_images"
 
-### problem: now two subdirectories down 
-
 def list_files(dir):                                                                                                  
     r = []                                                                                                            
     subdirs = [x[0] for x in os.walk(dir)]                                                                            
