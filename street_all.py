@@ -6,6 +6,9 @@ import os
 from os import listdir
 import io
 import pathlib
+import time
+
+start_time = time.time()
 
 # data frame to save id, red value pixels, green value pixels, blue value pixels
 df_street = pd.DataFrame(columns=['DHSID_EA', 'red', 'green', 'blue', 'imagename'],
@@ -40,3 +43,5 @@ for image in list_files(folder_dir):
   
 print(df_street.head())
 df_street.to_pickle("C:\\Users\\isabe\\Documents\\BA\\BA\\street_all.pkl")
+
+print("Process finished --- %s seconds ---" % (time.time() - start_time))
