@@ -59,28 +59,57 @@ x_train_satellite, x_test_satellite, y_train_satellite, y_test_satellite = train
 y_train_street_grob = np.digitize(y_train_street, [1, 2, 3, 4, 5])
 y_test_street_grob = np.digitize(y_test_street, [1, 2, 3, 4, 5]) 
 print(y_train_street_grob)
+y_train_satellite_grob = np.digitize(y_train_satellite, [1, 2, 3, 4, 5])
+y_test_satellite_grob = np.digitize(y_test_satellite, [1, 2, 3, 4, 5]) 
+print(y_train_satellite_grob)
 
 
 # training and predictions 
-classifier = KNeighborsClassifier(n_neighbors=5)
-classifier.fit(x_train_street, y_train_street_grob)
+### street ###
+classifier_street = KNeighborsClassifier(n_neighbors=5)
+classifier_street.fit(x_train_street, y_train_street_grob)
 
-y_pred = classifier.predict(x_test_street)
-cm = confusion_matrix(y_test_street_grob, y_pred)
-ac = accuracy_score(y_test_street_grob, y_pred)
-cl_matrix = classification_report(y_test_street_grob, y_pred)
-print(cm)
-print(ac)
-print(cl_matrix)
+y_pred_street = classifier_street.predict(x_test_street)
+cm_street = confusion_matrix(y_test_street_grob, y_pred_street)
+ac_street = accuracy_score(y_test_street_grob, y_pred_street)
+cl_matrix_street = classification_report(y_test_street_grob, y_pred_street)
+print(cm_street)
+print(ac_street)
+print(cl_matrix_street)
 
 
-error = []
+error_street = []
 for i in range(1,5):
-    knn = KNeighborsClassifier(n_neighbors=i)
-    knn.fit(x_train_street, y_train_street_grob)
-    pred_i = knn.predict(x_test_street)
-    error.append(np.mean(pred_i != y_test_street_grob))
+    knn_street = KNeighborsClassifier(n_neighbors=i)
+    knn_street.fit(x_train_street, y_train_street_grob)
+    pred_i_street = knn_street.predict(x_test_street)
+    error_street.append(np.mean(pred_i_street != y_test_street_grob))
 
 plt.figure(figsize=(12,6))
-plt.plot(range(1,5), error, color='red', linestyle='dashed', marker='o', markerfacecolor='blue', markersize=10)
+plt.plot(range(1,5), error_street, color='red', linestyle='dashed', marker='o', markerfacecolor='blue', markersize=10)
+plt.show()
+
+
+### satellite ###
+classifier_satellite = KNeighborsClassifier(n_neighbors=5)
+classifier_satellite.fit(x_train_satellite, y_train_satellite_grob)
+
+y_pred_satellite = classifier_satellite.predict(x_test_satellite)
+cm_satellite = confusion_matrix(y_test_satellite_grob, y_pred_satellite)
+ac_satellite = accuracy_score(y_test_satellite_grob, y_pred_satellite)
+cl_matrix_satellite = classification_report(y_test_satellite_grob, y_pred_satellite)
+print(cm_satellite)
+print(ac_satellite)
+print(cl_matrix_satellite)
+
+
+error_satellite = []
+for i in range(1,5):
+    knn_satellite = KNeighborsClassifier(n_neighbors=i)
+    knn_satellite.fit(x_train_satellite, y_train_satellite_grob)
+    pred_i_satellite = knn_satellite.predict(x_test_satellite)
+    error_satellite.append(np.mean(pred_i_satellite != y_test_satellite_grob))
+
+plt.figure(figsize=(12,6))
+plt.plot(range(1,5), error_satellite, color='red', linestyle='dashed', marker='o', markerfacecolor='blue', markersize=10)
 plt.show()
