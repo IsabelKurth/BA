@@ -24,6 +24,27 @@ Y_satellite = data_satellite['water_index'].values
 
 print(X_street.shape)
 print(X_satellite.shape)
+
+# satellite: red
+plt.scatter(data_satellite.iloc[:,1], data_satellite['water_index'], color='red')
+# satellite: green
+plt.scatter(data_satellite.iloc[:,2], data_satellite['water_index'], color='green')
+# satellite: blue
+plt.scatter(data_satellite.iloc[:,3], data_satellite['water_index'], color='blue')
+
+
+# street: red
+plt.scatter(data_street.iloc[:,1], data_street['water_index'], color='red')
+# street: green
+plt.scatter(data_street.iloc[:,2], data_street['water_index'], color='green')
+# street: blue
+plt.scatter(data_street.iloc[:,3], data_street['water_index'], color='blue')
+plt.show()
+
+criteria = data_street[data_street.iloc[:,3] < 4]
+print(criteria)
+
+"""
 # auf halbe Zahlen gerundet 
 for x in range(len(Y_street)):
     if (Y_street[x] < 5 and Y_street[x] >= 4.5):
@@ -91,9 +112,6 @@ plt.figure(figsize=(12,6))
 plt.plot(range(1,20), error_street, color='red', linestyle='dashed', marker='o', markerfacecolor='blue', markersize=10)
 plt.show()
 
-plt.scatter(y_test_street_grob, y_pred_street)
-plt.show()
-
 
 ### satellite ###
 classifier_satellite = KNeighborsClassifier(n_neighbors=5)
@@ -119,6 +137,4 @@ plt.figure(figsize=(12,6))
 plt.plot(range(1,20), error_satellite, color='red', linestyle='dashed', marker='o', markerfacecolor='blue', markersize=10)
 plt.show()
 
-
-plt.scatter(y_test_satellite_grob, y_pred_satellite)
-plt.show()
+"""
