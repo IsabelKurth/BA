@@ -44,7 +44,7 @@ plt.show()
 criteria = data_street[data_street.iloc[:,3] < 4]
 print(criteria)
 
-"""
+
 # auf halbe Zahlen gerundet 
 for x in range(len(Y_street)):
     if (Y_street[x] < 5 and Y_street[x] >= 4.5):
@@ -137,4 +137,3 @@ plt.figure(figsize=(12,6))
 plt.plot(range(1,20), error_satellite, color='red', linestyle='dashed', marker='o', markerfacecolor='blue', markersize=10)
 plt.show()
 
-"""
