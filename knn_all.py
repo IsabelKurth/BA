@@ -22,6 +22,8 @@ X_satellite = data_satellite_RGB.values
 Y_street = data_street['water_index'].values
 Y_satellite = data_satellite['water_index'].values
 
+print(X_street.shape)
+print(X_satellite.shape)
 # auf halbe Zahlen gerundet 
 for x in range(len(Y_street)):
     if (Y_street[x] < 5 and Y_street[x] >= 4.5):
@@ -79,14 +81,17 @@ print(cl_matrix_street)
 
 
 error_street = []
-for i in range(1,5):
+for i in range(1,20):
     knn_street = KNeighborsClassifier(n_neighbors=i)
     knn_street.fit(x_train_street, y_train_street_grob)
     pred_i_street = knn_street.predict(x_test_street)
     error_street.append(np.mean(pred_i_street != y_test_street_grob))
 
 plt.figure(figsize=(12,6))
-plt.plot(range(1,5), error_street, color='red', linestyle='dashed', marker='o', markerfacecolor='blue', markersize=10)
+plt.plot(range(1,20), error_street, color='red', linestyle='dashed', marker='o', markerfacecolor='blue', markersize=10)
+plt.show()
+
+plt.scatter(y_test_street_grob, y_pred_street)
 plt.show()
 
 
@@ -104,12 +109,16 @@ print(cl_matrix_satellite)
 
 
 error_satellite = []
-for i in range(1,5):
+for i in range(1,20):
     knn_satellite = KNeighborsClassifier(n_neighbors=i)
     knn_satellite.fit(x_train_satellite, y_train_satellite_grob)
     pred_i_satellite = knn_satellite.predict(x_test_satellite)
     error_satellite.append(np.mean(pred_i_satellite != y_test_satellite_grob))
 
 plt.figure(figsize=(12,6))
-plt.plot(range(1,5), error_satellite, color='red', linestyle='dashed', marker='o', markerfacecolor='blue', markersize=10)
+plt.plot(range(1,20), error_satellite, color='red', linestyle='dashed', marker='o', markerfacecolor='blue', markersize=10)
+plt.show()
+
+
+plt.scatter(y_test_satellite_grob, y_pred_satellite)
 plt.show()
