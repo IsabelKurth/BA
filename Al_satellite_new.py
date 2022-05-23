@@ -4,6 +4,7 @@ import scipy.sparse
 import pandas as pd 
 import os 
 
+
 # all satellite images for AL 2005 
 folder_AL_2008 = "C:\\Users\\isabe\\Documents\\BA\\BA\\DHS_Data\\AL-2008-5#"
 
@@ -54,6 +55,6 @@ for item in list_files(folder_AL_2008):
         }, ignore_index = True)
 
 
-
+print(df_satellite_AL_2008)
 df_satellite_AL_2008.to_pickle("C:\\Users\\isabe\\Documents\\BA\\BA\\AL_satellite_2008.pkl")
 

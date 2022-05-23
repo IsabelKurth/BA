@@ -8,8 +8,8 @@ from sklearn.preprocessing import KBinsDiscretizer
 from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
 
 # load data
-data_satellite = pd.read_pickle('AL_2008_finish_satellite.pkl')
-data_street = pd.read_pickle('AL_2008_finish_street.pkl')
+data_satellite = pd.read_pickle('finish_satellite.pkl')
+data_street = pd.read_pickle('finish_street.pkl')
 data_street = data_street.iloc[1:,:]
 data_satellite = data_satellite.iloc[1:,:]
 data_street_RGB = data_street.iloc[:,1:4]
