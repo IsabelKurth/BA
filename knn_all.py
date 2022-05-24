@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import KBinsDiscretizer
-from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
+from sklearn.metrics import confusion_matrix, accuracy_score, classification_report, r2_score
 
 # load data
 data_satellite = pd.read_pickle('finish_satellite.pkl')
@@ -31,6 +31,7 @@ plt.scatter(data_satellite.iloc[:,1], data_satellite['water_index'], color='red'
 plt.scatter(data_satellite.iloc[:,2], data_satellite['water_index'], color='green')
 # satellite: blue
 plt.scatter(data_satellite.iloc[:,3], data_satellite['water_index'], color='blue')
+plt.show()
 
 
 # street: red
@@ -41,8 +42,9 @@ plt.scatter(data_street.iloc[:,2], data_street['water_index'], color='green')
 plt.scatter(data_street.iloc[:,3], data_street['water_index'], color='blue')
 plt.show()
 
-criteria = data_street[data_street.iloc[:,3] < 4]
-print(criteria)
+# blue line on the left 
+# criteria = data_street[data_street.iloc[:,3] < 4]
+
 
 
 # auf halbe Zahlen gerundet 
@@ -96,20 +98,22 @@ y_pred_street = classifier_street.predict(x_test_street)
 cm_street = confusion_matrix(y_test_street_grob, y_pred_street)
 ac_street = accuracy_score(y_test_street_grob, y_pred_street)
 cl_matrix_street = classification_report(y_test_street_grob, y_pred_street)
+r2score_street = r2_score(y_test_street_grob, y_pred_street)
 print(cm_street)
-print(ac_street)
+print(ac_street) # 0.86
 print(cl_matrix_street)
+print(r2score_street) # -0.19
 
 
 error_street = []
-for i in range(1,20):
+for i in range(1,21):
     knn_street = KNeighborsClassifier(n_neighbors=i)
     knn_street.fit(x_train_street, y_train_street_grob)
     pred_i_street = knn_street.predict(x_test_street)
     error_street.append(np.mean(pred_i_street != y_test_street_grob))
 
 plt.figure(figsize=(12,6))
-plt.plot(range(1,20), error_street, color='red', linestyle='dashed', marker='o', markerfacecolor='blue', markersize=10)
+plt.plot(range(1,21), error_street, color='red', linestyle='dashed', marker='o', markerfacecolor='blue', markersize=10)
 plt.show()
 
 
@@ -121,19 +125,21 @@ y_pred_satellite = classifier_satellite.predict(x_test_satellite)
 cm_satellite = confusion_matrix(y_test_satellite_grob, y_pred_satellite)
 ac_satellite = accuracy_score(y_test_satellite_grob, y_pred_satellite)
 cl_matrix_satellite = classification_report(y_test_satellite_grob, y_pred_satellite)
+r2score_satellite = r2_score(y_test_satellite_grob, y_pred_satellite)
 print(cm_satellite)
-print(ac_satellite)
+print(ac_satellite) # 0.55
 print(cl_matrix_satellite)
+print(r2score_satellite) # 0.06
 
 
 error_satellite = []
-for i in range(1,20):
+for i in range(1,21):
     knn_satellite = KNeighborsClassifier(n_neighbors=i)
     knn_satellite.fit(x_train_satellite, y_train_satellite_grob)
     pred_i_satellite = knn_satellite.predict(x_test_satellite)
     error_satellite.append(np.mean(pred_i_satellite != y_test_satellite_grob))
 
 plt.figure(figsize=(12,6))
-plt.plot(range(1,20), error_satellite, color='red', linestyle='dashed', marker='o', markerfacecolor='blue', markersize=10)
+plt.plot(range(1,21), error_satellite, color='red', linestyle='dashed', marker='o', markerfacecolor='blue', markersize=10)
 plt.show()
 
