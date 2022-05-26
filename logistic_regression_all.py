@@ -22,16 +22,40 @@ X_satellite = data_satellite_RGB.values
 Y_street = data_street['water_index'].values
 Y_satellite = data_satellite['water_index'].values
 
-# hyperparameters
-# batch_size = 
-# learning_rate = 
 
-# constants
-num_classes = 5
+
+# auf halbe Zahlen gerundet 
+for x in range(len(Y_street)):
+    if (Y_street[x] < 5 and Y_street[x] >= 4.5):
+        Y_street[x] = str(5)
+    elif (Y_street[x] < 4.5 and Y_street[x] > 4): 
+        Y_street[x] = str(4.5)
+    elif (Y_street[x] < 4 and Y_street[x] > 3.5): 
+        Y_street[x] = str(4)
+    elif (Y_street[x] < 3.5 and Y_street[x] > 3): 
+        Y_street[x] = str(3.5)
+    elif (Y_street[x] < 3 and Y_street[x] > 2.5): 
+        Y_street[x] = str(3)
+    elif (Y_street[x] < 2.5 and Y_street[x] > 2): 
+        Y_street[x] = str(2.5)
+    elif (Y_street[x] < 2 and Y_street[x] > 1.5): 
+        Y_street[x] = str(2)
+    elif (Y_street[x] < 1.5 and Y_street[x] > 1): 
+        Y_street[x] = str(1.5)
+    elif (Y_street[x] < 1 and Y_street[x] > 0.5): 
+        Y_street[x] = str(1)
+    elif (Y_street[x] < 0.5 and Y_street[x] > 0): 
+        Y_street[x] = str(0.5)
+    else: 
+        Y_street[x] = str(0)                               
+
+print(Y_street.shape)
+Y_street_str = Y_street.astype(str)
+print(Y_street_str)
 
 # train test split
 # split data 
-x_train_street, x_test_street, y_train_street, y_test_street = train_test_split(X_street, Y_street, test_size = 0.2, train_size=0.8)
+x_train_street, x_test_street, y_train_street, y_test_street = train_test_split(X_street, Y_street_str, test_size = 0.2, train_size=0.8)
 x_train_satellite, x_test_satellite, y_train_satellite, y_test_satellite = train_test_split(X_satellite, Y_satellite, test_size = 0.2, train_size=0.8)
 
 ### street ###
@@ -40,12 +64,15 @@ y_train_street_grob = np.digitize(y_train_street, [1, 2, 3, 4, 5])
 y_test_street_grob = np.digitize(y_test_street, [1, 2, 3, 4, 5]) 
 
 logreg = LogisticRegression(multi_class = 'multinomial', max_iter = 1e3)
-logreg.fit(x_train_street, y_train_street_grob)
+logreg.fit(x_train_street, y_train_street)
 pred_street = logreg.predict(x_test_street)
-score = logreg.score(x_test_street, y_test_street_grob)
+score = logreg.score(x_test_street, y_test_street)
 print(score) #0.85
+print(logreg.classes_)
+print(logreg.intercept_)
+print(logreg.coef_)
 
-cm = confusion_matrix(y_test_street_grob, pred_street)
+cm = confusion_matrix(y_test_street, pred_street)
 print(cm)
 
 plt.figure(figsize=(5,5))
