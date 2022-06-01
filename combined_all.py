@@ -13,10 +13,12 @@ combined_satellite = pd.merge(satellite_data_all, water_data, how="left", on=['D
 combined_street = pd.merge(street_data_all, water_data, how="left", on=['DHSID_EA'])
 
 # get id, red, green, blue, water index 
-just_need_satellite = combined_satellite[['DHSID_EA', 'red', 'green', 'blue', 'water_index']]
+just_need_satellite = combined_satellite[['DHSID_EA', 'red', 'green', 'blue', 'water_index', 'year', 'path']]
 just_need_street = combined_street[['DHSID_EA', 'red', 'green', 'blue', 'water_index']]
 just_need_satellite = just_need_satellite.dropna(subset=['water_index'])
 just_need_street = just_need_street.dropna(subset=['water_index'])
+
+print(just_need_satellite.keys())
 
 just_need_satellite.to_pickle("C:\\Users\\isabe\\Documents\\BA\\BA\\finish_satellite.pkl")
 just_need_street.to_pickle("C:\\Users\\isabe\\Documents\\BA\\BA\\finish_street.pkl")

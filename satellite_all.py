@@ -9,7 +9,7 @@ import pickle
 # all satellite images 
 folder = "C:\\Users\\isabe\\Documents\\BA\\BA\\DHS_Data"
 
-df_satellite = pd.DataFrame(columns=['DHSID_EA', 'red', 'green', 'blue', 'imagename'])
+df_satellite = pd.DataFrame(columns=['DHSID_EA', 'red', 'green', 'blue', 'imagename', 'path'])
 
 def list_files(dir):                                                                                                  
     r = []                                                                                                            
@@ -37,8 +37,10 @@ for item in list_files(folder):
             'red':np.mean(image_data[2,:,:]), 
             'green': np.mean(image_data[1,:,:]), 
             'blue':np.mean(image_data[0,:,:]),
-            'imagename': firstsplit
+            'imagename': firstsplit,
+            'path': item
         }, ignore_index = True)
 
 print(df_satellite.head())
+print(df_satellite.keys())
 df_satellite.to_pickle("C:\\Users\\isabe\\Documents\\BA\\BA\\satellite_all.pkl")        

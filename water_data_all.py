@@ -17,3 +17,5 @@ print(dropped_rows.head())
 
 print(dropped_rows.groupby('cname').sum())
 # print(dropped_rows.groupby('cname'))
+
+print(water.head())
