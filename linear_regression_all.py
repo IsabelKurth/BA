@@ -16,12 +16,14 @@ data_street_all = pd.read_pickle('finish_street.pkl')
 data_satellite_night = pd.read_pickle('finish_satellite_night.pkl')
 data_street_all = data_street_all.iloc[1:,:]
 data_satellite_all = data_satellite_all.iloc[1:,:]
+"""
 print(data_street_all.shape)
 print(data_satellite_all.shape)
 print(data_satellite_night.shape)
 print(data_street_all.head())
 print(data_satellite_all.head())
 print(data_satellite_night.head())
+"""
 
 data_satellite_all_RGB = data_satellite_all.iloc[:,1:4]
 data_street_all_RGB = data_street_all.iloc[:,1:4]
@@ -43,6 +45,7 @@ model_satellite.fit(x_train_satellite_all, y_train_satellite_all)
 
 pred_satellite = model_satellite.predict(x_test_satellite_all)
 plt.scatter(y_test_satellite_all, pred_satellite)
+plt.title("satellite")
 plt.show()
 sns.regplot(x=y_test_satellite_all, y=pred_satellite)
 plt.show()
@@ -52,11 +55,17 @@ print(x_train_satellite_night.shape)
 print(y_train_satellite_all.shape)
 print(y_train_satellite_night.shape)
 
-x_train_satellite_night = x_train_satellite_night.array
+# pandas series to array 
+x_train_satellite_night = x_train_satellite_night.to_numpy()
+x_train_satellite_night = x_train_satellite_night.reshape(-1,1)
+x_test_satellite_night = x_test_satellite_night.to_numpy()
+x_test_satellite_night = x_test_satellite_night.reshape(-1,1)
+
 model_satellite_night = LinearRegression()
 model_satellite_night.fit(x_train_satellite_night, y_train_satellite_night)
 pred_satellite_night = model_satellite_night.predict(x_test_satellite_night)
 plt.scatter(y_test_satellite_night, pred_satellite_night)
+plt.title("satellite night")
 plt.show()
 sns.regplot(x=y_test_satellite_night, y= pred_satellite_night)
 plt.show()
@@ -67,6 +76,7 @@ model_street.fit(x_train_street_all, y_train_street_all)
 
 pred_street = model_street.predict(x_test_street_all)
 plt.scatter(y_test_street_all, pred_street)
+plt.title("street")
 plt.show()
 sns.regplot(x=y_test_street_all, y=pred_street)
 plt.show()
@@ -87,3 +97,11 @@ print("satellite MAE is", MAE_satellite)
 print("satellite MSE is", MSE_satellite)
 print("Satellite RMSE is", np.sqrt(MSE_satellite))
 print("Satellite r2 score", score_satellite)
+
+MAE_satellite_night = mean_absolute_error(y_test_satellite_night, pred_satellite_night)
+MSE_satellite_night = mean_squared_error(y_test_satellite_night, pred_satellite_night)
+score_satellite_night = r2_score(y_test_satellite_night, pred_satellite_night)
+print("satellite_n MAE is", MAE_satellite_night)
+print("satellite_n MSE is", MSE_satellite_night)
+print("Satellite_n RMSE is", np.sqrt(MSE_satellite_night))
+print("Satellite_n r2 score", score_satellite_night)
