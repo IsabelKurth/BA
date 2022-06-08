@@ -167,9 +167,9 @@ print(r2score_street) # -0.19
 error_street = []
 for i in range(1,21):
     knn_street = KNeighborsClassifier(n_neighbors=i)
-    knn_street.fit(x_train_street, y_train_street_grob)
+    knn_street.fit(x_train_street, y_train_street)
     pred_i_street = knn_street.predict(x_test_street)
-    error_street.append(np.mean(pred_i_street != y_test_street_grob))
+    error_street.append(np.mean(pred_i_street != y_test_street))
 
 plt.figure(figsize=(12,6))
 plt.plot(range(1,21), error_street, color='red', linestyle='dashed', marker='o', markerfacecolor='blue', markersize=10)
@@ -186,10 +186,10 @@ cm_satellite = confusion_matrix(y_test_satellite, y_pred_satellite)
 ac_satellite = accuracy_score(y_test_satellite, y_pred_satellite)
 cl_matrix_satellite = classification_report(y_test_satellite, y_pred_satellite)
 r2score_satellite = r2_score(y_test_satellite, y_pred_satellite)
-print(cm_satellite)
-print(ac_satellite) # 0.55
+print('cm satellite', cm_satellite)
+print('accuracy satellite:', ac_satellite) # 0.55
 print(cl_matrix_satellite)
-print(r2score_satellite) # 0.06
+print('r2 satellite', r2score_satellite) # 0.06
 
 
 error_satellite = []
@@ -221,9 +221,9 @@ ac_satellite_night = accuracy_score(y_test_satellite_night, y_pred_satellite_nig
 cl_matrix_satellite_night = classification_report(y_test_satellite_night, y_pred_satellite_night)
 r2score_satellite_night = r2_score(y_test_satellite_night, y_pred_satellite_night)
 print(cm_satellite_night)
-print(ac_satellite_night) # 0.55
+print('ac_night', ac_satellite_night) # 0.55
 print(cl_matrix_satellite_night)
-print(r2score_satellite_night) # -0.51
+print ('r2 night', r2score_satellite_night) # -0.51
 
 
 error_satellite_night = []
