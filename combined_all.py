@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # load satellite data
 satellite_data_all = pd.read_pickle('satellite_all.pkl')
@@ -32,4 +33,7 @@ print(dropped_rows.head())
 print(dropped_rows.groupby('cname').sum())
 print(water_data.shape)
 print(water_na_free.shape)
+
+plt.hist(water_data['water_index'])
+plt.show()
 

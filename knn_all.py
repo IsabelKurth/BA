@@ -225,6 +225,7 @@ print('ac_night', ac_satellite_night) # 0.55
 print(cl_matrix_satellite_night)
 print ('r2 night', r2score_satellite_night) # -0.51
 
+# histogram labels und Häufigkeit 
 
 error_satellite_night = []
 for i in range(1,21):

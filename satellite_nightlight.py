@@ -4,12 +4,13 @@ import scipy.sparse
 import pandas as pd 
 import os 
 import pickle
+from sklearn.preprocessing import StandardScaler
 
 
 # all satellite images 
 folder = "C:\\Users\\isabe\\Documents\\BA\\BA\\DHS_Data"
 
-df_satellite_night = pd.DataFrame(columns=['DHSID_EA', 'mean_nl', 'imagename', 'path'])
+df_satellite_night = pd.DataFrame(columns=['DHSID_EA', 'mean_nl', 'scaled_mean', 'imagename', 'path'])
 
 def list_files(dir):                                                                                                  
     r = []                                                                                                            
@@ -34,6 +35,9 @@ for item in list_files(folder):
             'path': item
         }, ignore_index = True)
 
+
 print(df_satellite_night.head())
 print(df_satellite_night.keys())
+print(df_satellite_night['mean_nl'].max())
+print(df_satellite_night['mean_nl'].min())
 df_satellite_night.to_pickle("C:\\Users\\isabe\\Documents\\BA\\BA\\satellite_all_night.pkl")  
