@@ -16,124 +16,23 @@ data_street = data_street.iloc[1:,:]
 data_satellite = data_satellite.iloc[1:,:]
 
 # features and labels
-X_street = data_street.iloc[:,1:4].values
-X_satellite = data_satellite.iloc[:,1:4].values
-X_satellite_night = data_satellite_night['mean_nl']
+X_street = data_street.iloc[:,4:7].values
+X_satellite = data_satellite.iloc[:,4:7].values
+X_satellite_night = data_satellite_night['mean_scaled']
 
-Y_street = data_street['water_index'].values
-Y_satellite = data_satellite['water_index'].values
-Y_satellite_night = data_satellite_night['water_index'].values
-
-
-# auf halbe Zahlen gerundet 
-for x in range(len(Y_street)):
-    if (Y_street[x] < 5 and Y_street[x] >= 4.5):
-        Y_street[x] = str(5)
-    elif (Y_street[x] < 4.5 and Y_street[x] > 4): 
-        Y_street[x] = str(4.5)
-    elif (Y_street[x] < 4 and Y_street[x] > 3.5): 
-        Y_street[x] = str(4)
-    elif (Y_street[x] < 3.5 and Y_street[x] > 3): 
-        Y_street[x] = str(3.5)
-    elif (Y_street[x] < 3 and Y_street[x] > 2.5): 
-        Y_street[x] = str(3)
-    elif (Y_street[x] < 2.5 and Y_street[x] > 2): 
-        Y_street[x] = str(2.5)
-    elif (Y_street[x] < 2 and Y_street[x] > 1.5): 
-        Y_street[x] = str(2)
-    elif (Y_street[x] < 1.5 and Y_street[x] > 1): 
-        Y_street[x] = str(1.5)
-    elif (Y_street[x] < 1 and Y_street[x] > 0.5): 
-        Y_street[x] = str(1)
-    elif (Y_street[x] < 0.5 and Y_street[x] > 0): 
-        Y_street[x] = str(0.5)
-    else: 
-        Y_street[x] = str(0)                               
-
-Y_street_str = Y_street.astype(str)
-
-for x in range(len(Y_satellite)):
-    if (Y_satellite[x] < 5 and Y_satellite[x] >= 4.5):
-        Y_satellite[x] = str(5)
-    elif (Y_satellite[x] < 4.5 and Y_satellite[x] > 4): 
-        Y_satellite[x] = str(4.5)
-    elif (Y_satellite[x] < 4 and Y_satellite[x] > 3.5): 
-        Y_satellite[x] = str(4)
-    elif (Y_satellite[x] < 3.5 and Y_satellite[x] > 3): 
-        Y_satellite[x] = str(3.5)
-    elif (Y_satellite[x] < 3 and Y_satellite[x] > 2.5): 
-        Y_satellite[x] = str(3)
-    elif (Y_satellite[x] < 2.5 and Y_satellite[x] > 2): 
-        Y_satellite[x] = str(2.5)
-    elif (Y_satellite[x] < 2 and Y_satellite[x] > 1.5): 
-        Y_satellite[x] = str(2)
-    elif (Y_satellite[x] < 1.5 and Y_satellite[x] > 1): 
-        Y_satellite[x] = str(1.5)
-    elif (Y_satellite[x] < 1 and Y_satellite[x] > 0.5): 
-        Y_satellite[x] = str(1)
-    elif (Y_satellite[x] < 0.5 and Y_satellite[x] > 0): 
-        Y_satellite[x] = str(0.5)
-    else: 
-        Y_satellite[x] = str(0)                               
-
-
-Y_satellite_str = Y_satellite.astype(str)
-
-
-for x in range(len(Y_satellite_night)):
-    if (Y_satellite_night[x] < 5 and Y_satellite_night[x] >= 4.5):
-        Y_satellite_night[x] = str(5)
-    elif (Y_satellite_night[x] < 4.5 and Y_satellite_night[x] > 4): 
-        Y_satellite_night[x] = str(4.5)
-    elif (Y_satellite_night[x] < 4 and Y_satellite_night[x] > 3.5): 
-        Y_satellite_night[x] = str(4)
-    elif (Y_satellite_night[x] < 3.5 and Y_satellite_night[x] > 3): 
-        Y_satellite_night[x] = str(3.5)
-    elif (Y_satellite_night[x] < 3 and Y_satellite_night[x] > 2.5): 
-        Y_satellite_night[x] = str(3)
-    elif (Y_satellite_night[x] < 2.5 and Y_satellite_night[x] > 2): 
-        Y_satellite_night[x] = str(2.5)
-    elif (Y_satellite_night[x] < 2 and Y_satellite_night[x] > 1.5): 
-        Y_satellite_night[x] = str(2)
-    elif (Y_satellite_night[x] < 1.5 and Y_satellite_night[x] > 1): 
-        Y_satellite_night[x] = str(1.5)
-    elif (Y_satellite_night[x] < 1 and Y_satellite_night[x] > 0.5): 
-        Y_satellite_night[x] = str(1)
-    elif (Y_satellite_night[x] < 0.5 and Y_satellite_night[x] > 0): 
-        Y_satellite_night[x] = str(0.5)
-    else: 
-        Y_satellite_night[x] = str(0)                               
-
-
-Y_satellite_night_str = Y_satellite_night.astype(str)
+Y_street = data_street['water_index_rnd']
+Y_satellite = data_satellite['water_index_rnd']
+Y_satellite_night = data_satellite_night['water_index_rnd']
 
 
 # train test split
 # split data 
-x_train_street, x_test_street, y_train_street, y_test_street = train_test_split(X_street, Y_street_str, test_size = 0.2, train_size=0.8)
-x_train_satellite, x_test_satellite, y_train_satellite, y_test_satellite = train_test_split(X_satellite, Y_satellite_str, test_size = 0.2, train_size=0.8)
-x_train_satellite_night, x_test_satellite_night, y_train_satellite_night, y_test_satellite_night = train_test_split(X_satellite_night, Y_satellite_night_str, test_size = 0.2, train_size=0.8)
-
-# scalling data 
-sc_X = StandardScaler()
-x_train_street = sc_X.fit_transform(x_train_street)
-x_test_street = sc_X.fit_transform(x_test_street)
-x_train_satellite = sc_X.fit_transform(x_train_satellite)
-x_test_satellite = sc_X.fit_transform(x_test_satellite)
-
-x_train_satellite_night = x_train_satellite_night.to_numpy()
-x_train_satellite_night = x_train_satellite_night.reshape(-1,1)
-x_train_satellite_night = sc_X.fit_transform(x_train_satellite_night)
-x_test_satellite_night = x_test_satellite_night.to_numpy()
-x_test_satellite_night = x_test_satellite_night.reshape(-1,1)
-x_test_satellite_night = sc_X.fit_transform(x_test_satellite_night)
+x_train_street, x_test_street, y_train_street, y_test_street = train_test_split(X_street, Y_street.astype(str), test_size = 0.2, train_size=0.8)
+x_train_satellite, x_test_satellite, y_train_satellite, y_test_satellite = train_test_split(X_satellite, Y_satellite.astype(str), test_size = 0.2, train_size=0.8)
+x_train_satellite_night, x_test_satellite_night, y_train_satellite_night, y_test_satellite_night = train_test_split(X_satellite_night, Y_satellite_night.astype(str), test_size = 0.2, train_size=0.8)
 
 
 ### street ###
-# auf ganze Zahlen gerundet 
-#y_train_street_grob = np.digitize(y_train_street, [1, 2, 3, 4, 5])
-#y_test_street_grob = np.digitize(y_test_street, [1, 2, 3, 4, 5]) 
-
 logreg = LogisticRegression(multi_class = 'multinomial', max_iter = 1500)
 logreg.fit(x_train_street, y_train_street)
 pred_street = logreg.predict(x_test_street)
@@ -160,10 +59,6 @@ plt.show()
 
 
 ### satellite ###
-# auf ganze Zahlen gerundet 
-#y_train_satellite_grob = np.digitize(y_train_satellite, [1, 2, 3, 4, 5])
-#y_test_satellite_grob = np.digitize(y_test_satellite, [1, 2, 3, 4, 5]) 
-
 logreg_sat = LogisticRegression(multi_class = 'multinomial', max_iter = 1500)
 logreg_sat.fit(x_train_satellite, y_train_satellite)
 pred_satellite = logreg_sat.predict(x_test_satellite)
@@ -187,6 +82,8 @@ plt.show()
 #plt.show()
 
 ### satellite night ###
+x_train_satellite_night = x_train_satellite_night.to_numpy().reshape(-1,1)
+x_test_satellite_night = x_test_satellite_night.to_numpy().reshape(-1,1)
 logreg_night = LogisticRegression(multi_class = 'multinomial', max_iter = 1500)
 logreg_night.fit(x_train_satellite_night, y_train_satellite_night)
 pred_night = logreg_night.predict(x_test_satellite_night)
