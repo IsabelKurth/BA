@@ -7,6 +7,7 @@ from os import listdir
 import io
 import pathlib
 import time
+from sklearn.preprocessing import StandardScaler 
 
 start_time = time.time()
 
@@ -41,7 +42,7 @@ for image in list_files(folder_dir):
             'imagename': os.path.basename(image)
         }, ignore_index=True)
   
-print(df_street.head())
+
 df_street.to_pickle("C:\\Users\\isabe\\Documents\\BA\\BA\\street_all.pkl")
 
 print("Process finished --- %s seconds ---" % (time.time() - start_time))

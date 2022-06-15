@@ -1,7 +1,9 @@
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
+from sklearn.preprocessing import StandardScaler
 
 
 ### plot sigmoid: logistic regression ###
@@ -21,7 +23,7 @@ plt.yticks([0.0, 0.5, 1.0])
 ax = plt.gca()
 ax.yaxis.grid(True)
 plt.tight_layout()
-plt.show()
+#plt.show()
 
 
 ### plot regression line: linear regression ###
@@ -46,5 +48,6 @@ r2_score = reg.score(X, y)
 plt.plot(X, ypred, color='red', label='regression line')
 plt.scatter(X, y, c='green', label='data')
 plt.plot(mse)
-plt.show()
+#plt.show()
+
 
