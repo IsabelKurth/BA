@@ -6,7 +6,7 @@ import os
 
 
 # all satellite images for AL 2005 
-folder_AL_2008 = "C:\\Users\\isabe\\Documents\\BA\\BA\\DHS_Data\\AL-2008-5#"
+folder_AL_2008 = "..\\DHS_Data\\AL-2008-5#"
 
 # dataframe to save RGB values and DHSID_EA id 
 df_satellite_AL_2008 = pd.DataFrame(columns=['DHSID_EA', 'red', 'green', 'blue', 'imagename'])

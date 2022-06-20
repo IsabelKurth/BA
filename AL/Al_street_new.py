@@ -11,7 +11,7 @@ import pathlib
 df_street = pd.DataFrame(columns=['DHSID_EA', 'red', 'green', 'blue', 'imagename'],
 index = ['DHSID_EA'])
 
-folder_dir = "C:\\Users\\isabe\\Documents\\BA\\BA\\Street_images\\AL"
+folder_dir = "..\\Street_images\\AL"
 
   
 def list_files(dir):                                                                                                  
@@ -40,4 +40,4 @@ for image in list_files(folder_dir):
         }, ignore_index=True)
   
 
-df_street.to_pickle("C:\\Users\\isabe\\Documents\\BA\\BA\\AL_street_2008.pkl")
+df_street.to_pickle("..\\AL_street_2008.pkl")

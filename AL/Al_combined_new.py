@@ -16,5 +16,5 @@ AL_combined_data_street = pd.merge(al_street_data, al_water, how="left", on=['DH
 just_need_AL_satellite = AL_combined_data_satellite[['DHSID_EA', 'red', 'green', 'blue', 'water_index']]
 just_need_AL_street = AL_combined_data_street[['DHSID_EA', 'red', 'green', 'blue', 'water_index']]
 
-just_need_AL_satellite.to_pickle("..\\AL\\AL_2008_finish_satellite.pkl")
-just_need_AL_street.to_pickle("..\\AL\\AL_2008_finish_street.pkl")
+just_need_AL_satellite.to_pickle("..\\AL_2008_finish_satellite.pkl")
+just_need_AL_street.to_pickle("..\\AL_2008_finish_street.pkl")
