@@ -54,7 +54,7 @@ combined_street['blue_scaled'] = blue_scaled_st
 # get relevant columns only 
 just_need_satellite = combined_satellite[['DHSID_EA', 'red', 'green', 'blue', 'red_scaled', 'green_scaled', 'blue_scaled', 'water_index', 'year', 'path']]
 just_need_satellite_night = combined_satellite_night[['DHSID_EA', 'mean_nl', 'mean_scaled', 'water_index', 'year', 'path']]
-just_need_street = combined_street[['DHSID_EA', 'red', 'green', 'blue', 'red_scaled', 'green_scaled', 'blue_scaled', 'water_index']]
+just_need_street = combined_street[['DHSID_EA', 'red', 'green', 'blue', 'red_scaled', 'green_scaled', 'blue_scaled', 'year', 'water_index']]
 
 # drop rows with no water index data available 
 just_need_satellite = just_need_satellite.dropna(subset=['water_index'])
@@ -69,18 +69,42 @@ just_need_satellite['water_index_rnd'] = round_half(just_need_satellite['water_i
 just_need_satellite_night['water_index_rnd'] = round_half(just_need_satellite_night['water_index'])
 just_need_street['water_index_rnd'] = round_half(just_need_street['water_index'])
 
-just_need_satellite.to_pickle("C:\\Users\\isabe\\Documents\\BA\\BA\\finish_satellite.pkl")
-just_need_satellite_night.to_pickle("C:\\Users\\isabe\\Documents\\BA\\BA\\finish_satellite_night.pkl")
-just_need_street.to_pickle("C:\\Users\\isabe\\Documents\\BA\\BA\\finish_street.pkl")
+just_need_satellite.to_pickle("..\\finish_satellite.pkl")
+just_need_satellite_night.to_pickle("..\\finish_satellite_night.pkl")
+just_need_street.to_pickle("..\\BA\\finish_street.pkl")
+
+# split in DMSP and VIIRS
+satellite_viirs, satellite_dmsp = [x for _, x in just_need_satellite.groupby(just_need_satellite['year'] <= 2011)]
+satellite_n_viirs, satellite_n_dmsp = [x for _, x in just_need_satellite_night.groupby(just_need_satellite_night['year'] <= 2011)]
+street_viirs, street_dmsp = [x for _, x in just_need_street.groupby(just_need_street['year'] <= 2011)]
+
+satellite_viirs.to_pickle("..\\BA\\satellite_viirs.pkl")
+satellite_dmsp.to_pickle("..\\BA\\satellite_dmsp.pkl")
+satellite_n_viirs.to_pickle("..\BA\\\satellite_n_viirs.pkl")
+satellite_n_dmsp.to_pickle("..\\BA\\satellite_n_dmsp.pkl")
+street_viirs.to_pickle("..\\BA\\street_viirs.pkl")
+street_dmsp.to_pickle("..\\BA\\street_dmsp.pkl")
+
 
 # combine satellite and street #
-combined_s_s = pd.merge(just_need_satellite, just_need_street, how="inner", on=['DHSID_EA'])
-just_need_s_s = combined_s_s[['DHSID_EA', 'red_scaled_x', 'green_scaled_x', 'blue_scaled_x', 'red_scaled_y', 'green_scaled_y', 'blue_scaled_y', 'water_index_y']]
-just_need_s_s = just_need_s_s.rename(columns={'red_scaled_x': 'red_sat', 'green_scaled_x': 'green_sat', 'blue_scaled_x': 'blue_sat', 
-'red_scaled_y': 'red_str', 'green_scaled_y': 'green_str', 'blue_scaled_y': 'blue_str', 'water_index_y': 'water_index'})
-just_need_s_s['water_index_rnd'] = round_half(just_need_s_s['water_index'])
-just_need_s_s.to_pickle("C:\\Users\\isabe\\Documents\\BA\\BA\\finish_s_s.pkl")
+combined_s_s_6 = pd.merge(just_need_satellite, just_need_street, how="inner", on=['DHSID_EA'])
+just_need_s_s_6 = combined_s_s_6[['DHSID_EA', 'red_scaled_x', 'green_scaled_x', 'blue_scaled_x', 'red_scaled_y', 'green_scaled_y', 'blue_scaled_y', 'year_x', 'water_index_y']]
+just_need_s_s_6 = just_need_s_s_6.rename(columns={'red_scaled_x': 'red_sat', 'green_scaled_x': 'green_sat', 'blue_scaled_x': 'blue_sat', 
+'red_scaled_y': 'red_str', 'green_scaled_y': 'green_str', 'blue_scaled_y': 'blue_str', 'year_x': 'year', 'water_index_y': 'water_index'})
+just_need_s_s_6['water_index_rnd'] = round_half(just_need_s_s_6['water_index'])
+just_need_s_s_6.to_pickle("..\\BA\\finish_s_s_6.pkl")
 
+
+# combine satellite and street and night#
+combined_s_s_7 = pd.merge(just_need_satellite, just_need_street, how="inner", on=['DHSID_EA'])
+combined_s_s_7 = pd.merge(combined_s_s_7, just_need_satellite_night, how="inner", on=['DHSID_EA'])
+just_need_s_s_7 = combined_s_s_7[['DHSID_EA', 'red_scaled_x', 'green_scaled_x', 'blue_scaled_x', 'red_scaled_y', 'green_scaled_y', 'blue_scaled_y', 'mean_scaled', 'year_x', 'water_index_rnd']]
+just_need_s_s_7 = just_need_s_s_7.rename(columns={'red_scaled_x': 'red_sat', 'green_scaled_x': 'green_sat', 'blue_scaled_x': 'blue_sat', 
+'red_scaled_y': 'red_str', 'green_scaled_y': 'green_str', 'blue_scaled_y': 'blue_str', 'year_x': 'year', 'water_index_rnd': 'water_index'})
+just_need_s_s_7['water_index_rnd'] = round_half(just_need_s_s_7['water_index'])
+just_need_s_s_7.to_pickle("..\\BA\\finish_s_s_7.pkl")
+
+"""
 # get how many rows are dropped because water index is NaN
 water_na_free = water_data.dropna(subset=['water_index'])
 dropped_rows = water_data[~water_data.index.isin(water_na_free.index)]
@@ -94,3 +118,4 @@ plt.show()
 
 plt.hist(just_need_satellite['water_index_rnd'])
 plt.show()
+"""

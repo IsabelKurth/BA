@@ -11,133 +11,70 @@ from sklearn.metrics import confusion_matrix, accuracy_score, classification_rep
 data_satellite = pd.read_pickle('finish_satellite.pkl')
 data_street = pd.read_pickle('finish_street.pkl')
 data_satellite_night = pd.read_pickle('finish_satellite_night.pkl')
+data_satellite_night_dmsp= pd.read_pickle('satellite_n_dmsp.pkl')
+data_satellite_night_viirs = pd.read_pickle('satellite_n_viirs.pkl')
+data_6 = pd.read_pickle('finish_s_s_6.pkl')
 data_street = data_street.iloc[1:,:]
 data_satellite = data_satellite.iloc[1:,:]
 
+"""
 # features and labels
 X_street = data_street.iloc[:,4:7]
 X_satellite = data_satellite.iloc[:,4:7]
-X_satellite_night = data_satellite_night['mean_scaled']
-
-Y_street = data_street['water_index_rnd']
-Y_satellite = data_satellite['water_index_rnd']
-Y_satellite_night = data_satellite_night['water_index_rnd']
-
-
-# satellite: red
-plt.scatter(data_satellite.iloc[:,1], data_satellite['water_index'], color='red')
-# satellite: green
-plt.scatter(data_satellite.iloc[:,2], data_satellite['water_index'], color='green')
-# satellite: blue
-plt.scatter(data_satellite.iloc[:,3], data_satellite['water_index'], color='blue')
-#plt.show()
+X_satellite_night = data_satellite_night['mean_scaled'].to_numpy().reshape(-1,1)
+X_satellite_night_dmsp = data_satellite_night_dmsp['mean_scaled'].to_numpy().reshape(-1,1)
+X_satellite_night_viirs = data_satellite_night_viirs['mean_scaled'].to_numpy().reshape(-1,1)
+X_6 = data_6.iloc[:,1:7]
+"""
 
 
-# street: red
-plt.scatter(data_street.iloc[:,1], data_street['water_index'], color='red')
-# street: green
-plt.scatter(data_street.iloc[:,2], data_street['water_index'], color='green')
-# street: blue
-plt.scatter(data_street.iloc[:,3], data_street['water_index'], color='blue')
-#plt.show()
+### idea: function knn for all datasets 
 
-# blue line on the left 
-# criteria = data_street[data_street.iloc[:,3] < 4]
-
-
-# train test split
-# split data 
-x_train_street, x_test_street, y_train_street, y_test_street = train_test_split(X_street, Y_street.astype(str), test_size = 0.2, train_size=0.8)
-x_train_satellite, x_test_satellite, y_train_satellite, y_test_satellite = train_test_split(X_satellite, Y_satellite.astype(str), test_size = 0.2, train_size=0.8)
-x_train_satellite_night, x_test_satellite_night, y_train_satellite_night, y_test_satellite_night = train_test_split(X_satellite_night, Y_satellite_night.astype(str), test_size = 0.2, train_size=0.8)
-
-
-# training and predictions 
-### street ###
-classifier_street = KNeighborsClassifier(n_neighbors=5)
-classifier_street.fit(x_train_street, y_train_street)
-
-y_pred_street = classifier_street.predict(x_test_street)
-cm_street = confusion_matrix(y_test_street, y_pred_street)
-ac_street = accuracy_score(y_test_street, y_pred_street)
-cl_matrix_street = classification_report(y_test_street, y_pred_street)
-r2score_street = r2_score(y_test_street, y_pred_street)
-print(cm_street)
-print(ac_street) # 0.86
-print(cl_matrix_street)
-print(r2score_street) # -0.19
+# metrics for knn with optimal k
+# input: dataset, features X (either rgb or mean_nl), optimal k
+# output: evaluation metrics
+def knn_optimal(dataset, X, k):
+    Y = dataset['water_index_rnd']
+    x_train, x_test, y_train, y_test = train_test_split(X, Y.astype(str), test_size=0.2, train_size=0.8)
+    classifier = KNeighborsClassifier(n_neighbors=k)
+    classifier.fit(x_train, y_train)
+    y_pred = classifier.predict(x_test)
+    cm = confusion_matrix(y_test, y_pred)
+    ac = accuracy_score(y_test, y_pred)
+    cl_matrix = classification_report(y_test, y_pred)
+    r2score = r2_score(y_test, y_pred)
+    print(cm)
+    print(ac)
+    print(cl_matrix)
+    print(r2score)
 
 
-error_street = []
-for i in range(1,21):
-    knn_street = KNeighborsClassifier(n_neighbors=i)
-    knn_street.fit(x_train_street, y_train_street)
-    pred_i_street = knn_street.predict(x_test_street)
-    error_street.append(np.mean(pred_i_street != y_test_street))
+# find optimal l
+# input: dataset and features 
+# output: r^2 for all ks and optimal k
+def knn_k(dataset, X):
+    best_r2 = 0
+    best_k = None
+    error = []
+    for i in range (1,21):
+        Y = dataset['water_index_rnd']
+        x_train, x_test, y_train, y_test = train_test_split(X, Y.astype(str), test_size=0.2, train_size=0.8)
+        knn = KNeighborsClassifier(n_neighbors=5)
+        knn.fit(x_train, y_train)
+        y_pred = knn.predict(x_test)
+        r2score = r2_score(y_test, y_pred)
+        print(f'k={i:2d} r^2 = {r2score:.3f}')
+        error.append(np.mean(y_pred != y_test))
+        if r2score > best_r2:
+            best_r2 = r2score
+            best_k = i
+ 
+    print(best_k)
+    plt.figure(figsize=(12,6))
+    plt.plot(range(1, 21), error, color='red', linestyle='dashed', marker='o', markerfacecolor='blue', markersize=10)  
+    plt.show()  
 
-plt.figure(figsize=(12,6))
-plt.plot(range(1,21), error_street, color='red', linestyle='dashed', marker='o', markerfacecolor='blue', markersize=10)
-plt.title("street")
-plt.show()
+    #knn_optimal(dataset, X, best_k)  
 
-
-### satellite ###
-classifier_satellite = KNeighborsClassifier(n_neighbors=5)
-classifier_satellite.fit(x_train_satellite, y_train_satellite)
-
-y_pred_satellite = classifier_satellite.predict(x_test_satellite)
-cm_satellite = confusion_matrix(y_test_satellite, y_pred_satellite)
-ac_satellite = accuracy_score(y_test_satellite, y_pred_satellite)
-cl_matrix_satellite = classification_report(y_test_satellite, y_pred_satellite)
-r2score_satellite = r2_score(y_test_satellite, y_pred_satellite)
-print('cm satellite', cm_satellite)
-print('accuracy satellite:', ac_satellite) # 0.55
-print(cl_matrix_satellite)
-print('r2 satellite', r2score_satellite) # 0.06
-
-
-error_satellite = []
-for i in range(1,21):
-    knn_satellite = KNeighborsClassifier(n_neighbors=i)
-    knn_satellite.fit(x_train_satellite, y_train_satellite)
-    pred_i_satellite = knn_satellite.predict(x_test_satellite)
-    error_satellite.append(np.mean(pred_i_satellite != y_test_satellite))
-
-plt.figure(figsize=(12,6))
-plt.plot(range(1,21), error_satellite, color='red', linestyle='dashed', marker='o', markerfacecolor='blue', markersize=10)
-plt.title("satellite")
-plt.show()
-
-
-### satellite night ###
-# pandas series to array 
-x_train_satellite_night = x_train_satellite_night.to_numpy().reshape(-1,1)
-x_test_satellite_night = x_test_satellite_night.to_numpy().reshape(-1,1)
-
-classifier_satellite_night = KNeighborsClassifier(n_neighbors=5)
-classifier_satellite_night.fit(x_train_satellite_night, y_train_satellite_night)
-
-y_pred_satellite_night = classifier_satellite_night.predict(x_test_satellite_night)
-cm_satellite_night = confusion_matrix(y_test_satellite_night, y_pred_satellite_night)
-ac_satellite_night = accuracy_score(y_test_satellite_night, y_pred_satellite_night)
-cl_matrix_satellite_night = classification_report(y_test_satellite_night, y_pred_satellite_night)
-r2score_satellite_night = r2_score(y_test_satellite_night, y_pred_satellite_night)
-print(cm_satellite_night)
-print('ac_night', ac_satellite_night) # 0.55
-print(cl_matrix_satellite_night)
-print ('r2 night', r2score_satellite_night) # -0.51
-
-# histogram labels und Häufigkeit 
-
-error_satellite_night = []
-for i in range(1,21):
-    knn_satellite_night = KNeighborsClassifier(n_neighbors=i)
-    knn_satellite_night.fit(x_train_satellite_night, y_train_satellite_night)
-    pred_i_satellite_night = knn_satellite_night.predict(x_test_satellite_night)
-    error_satellite_night.append(np.mean(pred_i_satellite_night != y_test_satellite_night))
-
-plt.figure(figsize=(12,6))
-plt.plot(range(1,21), error_satellite_night, color='red', linestyle='dashed', marker='o', markerfacecolor='blue', markersize=10)
-plt.title("satellite night")
-plt.show()
-
+print(knn_k(data_satellite_night, data_satellite_night['mean_scaled'].to_numpy().reshape(-1,1)))
+print(knn_optimal(data_satellite_night, data_satellite_night['mean_scaled'].to_numpy().reshape(-1,1), 12))
