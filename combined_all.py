@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np 
 from sklearn.preprocessing import StandardScaler
+import sys
 
 # load satellite data
 satellite_data_all = pd.read_pickle('satellite_all.pkl')
@@ -119,5 +120,4 @@ plt.show()
 plt.hist(just_need_satellite['water_index_rnd'])
 plt.show()
 """
-
-print(just_need_s_s_6.head())
+print(just_need_s_s_6.head(), flush=True)
