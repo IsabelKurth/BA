@@ -119,3 +119,5 @@ plt.show()
 plt.hist(just_need_satellite['water_index_rnd'])
 plt.show()
 """
+
+print(just_need_s_s_6.head())
