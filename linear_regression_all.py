@@ -34,10 +34,12 @@ def linreg(dataset, X):
     MAE = mean_absolute_error(y_test, y_pred)
     MSE = mean_squared_error(y_test, y_pred)
     score = r2_score(y_test, y_pred)
+    
+
     print("Street MAE is", MAE)
     print("Street MSE is", MSE)
     print("Street RMSE is", np.sqrt(MSE))
     print("Street r2 score", score)
 
 
-print(linreg(data_satellite_night, data_satellite_night['mean_nl'].to_numpy().reshape(-1,1)))
+linreg(data_satellite_night, data_satellite_night['mean_nl'].to_numpy().reshape(-1,1))
