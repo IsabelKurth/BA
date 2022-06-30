@@ -51,3 +51,11 @@ plt.plot(mse)
 #plt.show()
 
 
+
+water_data = pd.read_csv('dhs_final_labels.csv')
+water_data = water_data.dropna(subset=['water_index'])
+print(water_data['year'].min())
+print(water_data['year'].max())
+print(water_data['year'].unique())
+
+
