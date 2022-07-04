@@ -2,7 +2,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np 
 from sklearn.preprocessing import StandardScaler
-import sys
 
 # load satellite data
 satellite_data_all = pd.read_pickle('satellite_all.pkl')
@@ -105,19 +104,19 @@ just_need_s_s_7 = just_need_s_s_7.rename(columns={'red_scaled_x': 'red_sat', 'gr
 just_need_s_s_7['water_index_rnd'] = round_half(just_need_s_s_7['water_index'])
 just_need_s_s_7.to_pickle("..\\BA\\finish_s_s_7.pkl")
 
-"""
+
 # get how many rows are dropped because water index is NaN
 water_na_free = water_data.dropna(subset=['water_index'])
 dropped_rows = water_data[~water_data.index.isin(water_na_free.index)]
-#print(dropped_rows.head())
-#print(dropped_rows.groupby('cname').sum())
-#print(water_data.shape)
-#print(water_na_free.shape)
+print(dropped_rows.head())
+print(dropped_rows.groupby('cname').sum())
+print(water_data.shape)
+print(water_na_free.shape)
 
 plt.hist(water_data['water_index'])
 plt.show()
 
 plt.hist(just_need_satellite['water_index_rnd'])
 plt.show()
-"""
+
 print(just_need_s_s_6.head(), flush=True)

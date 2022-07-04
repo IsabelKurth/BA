@@ -25,11 +25,9 @@ def list_files(dir):
 # print(list_files(folder))    
 
 for item in list_files(folder):
-    list_data = np.load(item, allow_pickle = True)
-    # not working: 
-    #with open (item, "rb") as f: 
-    #    list_data = pickle.load(f)
-    image_data = list_data[list_data.files[0]]
+    #list_data = np.load(item, allow_pickle = True)
+    #image_data = list_data[list_data.files[0]]
+    image_data = np.load(item)['x']
     firstsplit = (os.path.basename(item))
     id = os.path.splitext(firstsplit)[0]
     df_satellite = df_satellite.append({
@@ -43,4 +41,4 @@ for item in list_files(folder):
 
 print(df_satellite.head())
 print(df_satellite.keys())
-df_satellite.to_pickle("C:\\Users\\isabe\\Documents\\BA\\BA\\satellite_all.pkl")        
+df_satellite.to_pickle("..\\BA\\satellite_all.pkl")        

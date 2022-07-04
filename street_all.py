@@ -43,6 +43,6 @@ for image in list_files(folder_dir):
         }, ignore_index=True)
   
 
-df_street.to_pickle("C:\\Users\\isabe\\Documents\\BA\\BA\\street_all.pkl")
+df_street.to_pickle("..\\BA\\street_all.pkl")
 
 print("Process finished --- %s seconds ---" % (time.time() - start_time))

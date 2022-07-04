@@ -4,6 +4,14 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 from sklearn.preprocessing import StandardScaler
+import matplotlib.pyplot as plt
+import numpy as np
+import npzviewer
+dfile = "C:\\Users\\isabe\\Documents\\BA\\BA\\DHS_Data\\CM-2011-6#\\CM-2011-6#-00000050.npz"
+images = np.load(dfile)
+print(images.files)
+
+#npzviewer [dfile]
 
 
 ### plot sigmoid: logistic regression ###
