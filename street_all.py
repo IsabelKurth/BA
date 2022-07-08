@@ -33,16 +33,19 @@ def list_files(dir):
 for image in list_files(folder_dir):
     firstsplit = os.path.split(image)[0]
     id = os.path.split(firstsplit)[1]
+    country = id[:2]
     data = asarray(Image.open(image))
     df_street = df_street.append({
             'DHSID_EA': id, 
             'red': np.mean(np.ndarray.flatten(data[:,:,0])), 
             'green': np.mean(np.ndarray.flatten(data[:,:,1])), 
             'blue':np.mean(np.ndarray.flatten(data[:,:,2])),
-            'imagename': os.path.basename(image)
+            'imagename': os.path.basename(image), 
+            'country': country
         }, ignore_index=True)
   
 
 df_street.to_pickle("..\\BA\\street_all.pkl")
+print(df_street.head())
 
 print("Process finished --- %s seconds ---" % (time.time() - start_time))

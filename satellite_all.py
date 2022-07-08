@@ -30,13 +30,15 @@ for item in list_files(folder):
     image_data = np.load(item)['x']
     firstsplit = (os.path.basename(item))
     id = os.path.splitext(firstsplit)[0]
+    country = id[:2]
     df_satellite = df_satellite.append({
             'DHSID_EA': id, 
             'red':np.mean(image_data[2,:,:]), 
             'green': np.mean(image_data[1,:,:]), 
             'blue':np.mean(image_data[0,:,:]),
             'imagename': firstsplit,
-            'path': item
+            'path': item,
+            'country': country
         }, ignore_index = True)
 
 print(df_satellite.head())

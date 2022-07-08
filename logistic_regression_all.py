@@ -10,6 +10,8 @@ import matplotlib.pyplot as plt
 
 # load data
 data_satellite = pd.read_pickle('finish_satellite.pkl')
+data_satellite_viirs = pd.read_pickle('satellite_viirs.pkl')
+data_satellite_dmsp = pd.read_pickle('satellite_dmsp.pkl')
 data_street = pd.read_pickle('finish_street.pkl')
 data_satellite_night = pd.read_pickle('finish_satellite_night.pkl')
 data_satellite_night_dmsp= pd.read_pickle('satellite_n_dmsp.pkl')
@@ -17,6 +19,7 @@ data_satellite_night_viirs = pd.read_pickle('satellite_n_viirs.pkl')
 data_6 = pd.read_pickle('finish_s_s_6.pkl')
 data_street = data_street.iloc[1:,:]
 data_satellite = data_satellite.iloc[1:,:]
+
 
 
 # features and labels
@@ -46,6 +49,15 @@ def logreg(dataset, X):
     plt.show()
 
 
-print(logreg(data_6, data_6.iloc[:,1:7]))
+#logreg(data_6, data_6.iloc[:,1:7])
+#logreg(data_satellite, data_satellite.iloc[:, 4:7])
+#logreg(data_satellite_viirs, data_satellite_viirs.iloc[:, 4:7])
+#logreg(data_satellite_dmsp, data_satellite_dmsp.iloc[:, 4:7])
+
+# x_train, y_train, x_test, y_test = 
+#train_data = dataset.loc[dataset['country'].isin(['AL', 'BD', 'CD', 'CM', 'GH', 'GU', 'HN', 'IA', 
+# 'ID', 'JO', 'KE', 'KM', 'LB', 'LS', 'MA', 'MB', 'MD', 'MM', 'MW', 'MZ', 'NG', NI',
+# 'PE', 'PH', 'SN', 'TG', 'TJ', 'UG', 'ZM', 'ZW'])])
+#test_data = 
 
 

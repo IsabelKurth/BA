@@ -23,16 +23,16 @@ def list_files(dir):
     return r  
 
 for item in list_files(folder):
-    list_data = np.load(item, allow_pickle = True)
-    list_data_int = list_data['x']
-    image_data = list_data[list_data.files[0]]
+    image_data = np.load(item)['x']
     firstsplit = (os.path.basename(item))
     id = os.path.splitext(firstsplit)[0]
+    country = id[:2]
     df_satellite_night = df_satellite_night.append({
             'DHSID_EA': id, 
-            'mean_nl': list_data_int[-1].mean(dtype=np.float64),
+            'mean_nl': image_data[-1].mean(dtype=np.float64),
             'imagename': firstsplit,
-            'path': item
+            'path': item, 
+            'country': country
         }, ignore_index = True)
 
 
@@ -40,4 +40,5 @@ print(df_satellite_night.head())
 print(df_satellite_night.keys())
 print(df_satellite_night['mean_nl'].max())
 print(df_satellite_night['mean_nl'].min())
+print(df_satellite_night.shape)
 df_satellite_night.to_pickle("C:\\Users\\isabe\\Documents\\BA\\BA\\satellite_all_night.pkl")  
