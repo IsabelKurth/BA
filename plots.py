@@ -7,10 +7,26 @@ from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
 import numpy as np
 import npzviewer
-dfile = "C:\\Users\\isabe\\Documents\\BA\\BA\\DHS_Data\\CM-2011-6#\\CM-2011-6#-00000050.npz"
-images = np.load(dfile)
-print(images.files)
+from PIL import Image
 
+def normalize8(I):
+    mn = I.min()
+    mx = I.max()
+
+    mx -= mn
+
+    I = ((I - mn)/mx) * 255
+    return I.astype(np.uint8)
+
+dfile = "C:\\Users\\isabe\\Documents\\BA\\BA\\DHS_Data\\CM-2011-6#\\CM-2011-6#-00000159.npz"
+data = np.load(dfile)
+print(data.files)
+image = data['x']
+#image = normalize8(image)
+print(image.shape, image.dtype)
+#img = Image.fromarray(image)
+plt.imshow(image[:3].transpose(1,2,0))
+plt.show()
 #npzviewer [dfile]
 
 
