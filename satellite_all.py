@@ -7,9 +7,9 @@ import pickle
 
 
 # all satellite images 
-folder = "C:\\Users\\isabe\\Documents\\BA\\BA\\DHS_Data"
+folder = "..\\BA\\DHS_Data"
 
-df_satellite = pd.DataFrame(columns=['DHSID_EA', 'red', 'green', 'blue', 'imagename', 'path'])
+df_satellite = pd.DataFrame(columns=['DHSID_EA', 'red', 'green', 'blue', 'imagename', 'path', 'country'])
 
 def list_files(dir):                                                                                                  
     r = []                                                                                                            

@@ -17,7 +17,7 @@ index = ['DHSID_EA'])
 
 
 # folder with all downloaded countries 
-folder_dir = "C:\\Users\\isabe\\Documents\\BA\\BA\\Street_images"
+folder_dir = "..\\BA\\Street_images"
 
 def list_files(dir):                                                                                                  
     r = []                                                                                                            
