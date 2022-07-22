@@ -41,14 +41,15 @@ for image in list_files(folder_dir):
     id = os.path.split(firstsplit)[1]
     country = id[:2]
     data = asarray(Image.open(image))
-    df_street = df_street.append({
+    mydict = {
             'DHSID_EA': id, 
             'red': np.mean(np.ndarray.flatten(data[:,:,0])), 
             'green': np.mean(np.ndarray.flatten(data[:,:,1])), 
             'blue':np.mean(np.ndarray.flatten(data[:,:,2])),
             'imagename': os.path.basename(image), 
-            'country': country
-        }, ignore_index=True)
+            'country': country}
+    df_street = pd.concat([df_street,pd.DataFrame([mydict])], ignore_index = True)
+    
   
 
 df_street.to_pickle("..\\BA\\street_all.pkl")
