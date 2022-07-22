@@ -8,8 +8,14 @@ import io
 import pathlib
 import time
 from sklearn.preprocessing import StandardScaler 
+from sys import platform
 
 start_time = time.time()
+
+if platform == "linux" or platform == "linux2":
+    folder_dir = "../BA/Street_images"
+elif platform == "win32" or platform == "win64":
+    folder_dir = "..\\BA\\Street_images"    
 
 # data frame to save id, red value pixels, green value pixels, blue value pixels
 df_street = pd.DataFrame(columns=['DHSID_EA', 'red', 'green', 'blue', 'imagename'],
@@ -17,7 +23,7 @@ index = ['DHSID_EA'])
 
 
 # folder with all downloaded countries 
-folder_dir = "..\\BA\\Street_images"
+# folder_dir = "..\\BA\\Street_images"
 
 def list_files(dir):                                                                                                  
     r = []                                                                                                            

@@ -20,14 +20,15 @@ def normalize8(I):
 
 # dfile = "C:\\Users\\isabe\\Documents\\BA\\BA\\DHS_Data\\CM-2011-6#\\CM-2011-6#-00000159.npz"
 dfile = "C:\\Users\\isabe\\Documents\\BA\\BA\\DHS_Data\\AM-2016-7#\\AM-2016-7#-00000045.npz"
+#dfile = "C:\\Users\\isabe\\Documents\\BA\\BA\\DHS_Data\\DR-2013-6#\\DR-2013-6#-00002296.npz"
 data = np.load(dfile)
 print(data.files)
 image = data['x']
 #image = normalize8(image)
 print(image.shape, image.dtype)
 #img = Image.fromarray(image)
-# plt.imshow(image[:3].transpose(1,2,0))
-plt.imshow(image[7])
+#plt.imshow(image[:3].transpose(1,2,0))
+plt.imshow(image[7], cmap='Greys')
 plt.show()
 plt.savefig('satellite day.png')
 #npzviewer [dfile]
