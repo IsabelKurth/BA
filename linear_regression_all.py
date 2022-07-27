@@ -18,6 +18,7 @@ data_satellite = data_satellite.iloc[1:,:]
 
 X_street = data_street.iloc[:,1:4]
 X_satellite = data_satellite.iloc[:,1:4].to_numpy().reshape(-1,1)
+X_satellite_night = data_satellite_night['mean_nl'].to_numpy().reshape(-1,1)
 
 
 def linreg(dataset, X):
@@ -41,5 +42,6 @@ def linreg(dataset, X):
     print("Street RMSE is", np.sqrt(MSE))
     print("Street r2 score", score)
 
-
-linreg(data_satellite_night, data_satellite_night['mean_nl'].to_numpy().reshape(-1,1))
+#linreg(data_street, data_street.iloc[:,1:4])
+linreg(data_satellite, data_satellite.iloc[:,1:4].to_numpy().reshape(-1,1))
+#linreg(data_satellite_night, data_satellite_night['mean_nl'].to_numpy().reshape(-1,1))
