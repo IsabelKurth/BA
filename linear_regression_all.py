@@ -62,9 +62,9 @@ def linreg(dataset, X):
     MSE = mean_squared_error(y_test, y_pred)
     score = r2_score(y_test, y_pred)
     
-    print("Street MAE is", MAE)
+    #print("Street MAE is", MAE)
     print("Street MSE is", MSE)
-    print("Street RMSE is", np.sqrt(MSE))
+    #print("Street RMSE is", np.sqrt(MSE))
     print("Street r2 score", score)
 
 linreg(data_street, data_street.iloc[:,4:7])
