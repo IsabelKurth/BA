@@ -76,5 +76,8 @@ def knn_k(dataset, X):
 
     #knn_optimal(dataset, X, best_k)  
 
-print(knn_k(data_satellite_night, data_satellite_night['mean_scaled'].to_numpy().reshape(-1,1)))
-print(knn_optimal(data_satellite_night, data_satellite_night['mean_scaled'].to_numpy().reshape(-1,1), 12))
+knn_k(data_satellite_night, data_satellite_night['mean_scaled'].to_numpy().reshape(-1,1))
+knn_optimal(data_satellite_night, data_satellite_night['mean_scaled'].to_numpy().reshape(-1,1), 10)
+
+knn_k(data_street, data_street.iloc[:,4:7])
+knn_optimal(data_street, data_street.iloc[:,4:7], 2)
