@@ -5,6 +5,7 @@ import pandas as pd
 import os 
 import pickle
 from sklearn.preprocessing import StandardScaler
+from sys import platform
 
 if platform == "linux" or platform == "linux2":
     folder = "../BA/DHS_Data"
@@ -46,6 +47,6 @@ print(df_satellite_night['mean_nl'].min())
 print(df_satellite_night.shape)
 
 if platform == "linux" or platform == "linux2":
-    df_satellite.to_pickle("../BA/satellite_all_night.pkl")   
+    df_satellite_night.to_pickle("../BA/satellite_all_night.pkl")   
 elif platform == "win32" or platform == "win64":
-    df_satellite.to_pickle("..\\BA\\satellite_all_night.pkl")  
+    df_satellite_night.to_pickle("..\\BA\\satellite_all_night.pkl")  
