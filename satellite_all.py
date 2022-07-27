@@ -4,10 +4,14 @@ import scipy.sparse
 import pandas as pd 
 import os 
 import pickle
+from sys import platform
 
 
-# all satellite images 
-folder = "..\\BA\\DHS_Data"
+if platform == "linux" or platform == "linux2":
+    folder = "../BA/DHS_Data"
+elif platform == "win32" or platform == "win64":
+    folder = "..\\BA\\DHS_Data"   
+
 
 df_satellite = pd.DataFrame(columns=['DHSID_EA', 'red', 'green', 'blue', 'imagename', 'path', 'country'])
 
@@ -31,7 +35,7 @@ for item in list_files(folder):
     firstsplit = (os.path.basename(item))
     id = os.path.splitext(firstsplit)[0]
     country = id[:2]
-    df_satellite = df_satellite.append({
+    mydict = {
             'DHSID_EA': id, 
             'red':np.mean(image_data[2,:,:]), 
             'green': np.mean(image_data[1,:,:]), 
@@ -39,8 +43,13 @@ for item in list_files(folder):
             'imagename': firstsplit,
             'path': item,
             'country': country
-        }, ignore_index = True)
+        }
+    df_satellite = pd.concat([df_satellite, pd.DataFrame([mydict])], ignore_index = True)
 
 print(df_satellite.head())
 print(df_satellite.keys())
-df_satellite.to_pickle("..\\BA\\satellite_all.pkl")        
+
+if platform == "linux" or platform == "linux2":
+    df_satellite.to_pickle("../BA/satellite_all.pkl")   
+elif platform == "win32" or platform == "win64":
+    df_satellite.to_pickle("..\\BA\\satellite_all.pkl")        

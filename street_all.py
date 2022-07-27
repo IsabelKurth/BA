@@ -49,10 +49,12 @@ for image in list_files(folder_dir):
             'imagename': os.path.basename(image), 
             'country': country}
     df_street = pd.concat([df_street,pd.DataFrame([mydict])], ignore_index = True)
-    
-  
 
-df_street.to_pickle("..\\BA\\street_all.pkl")
+  
+if platform == "linux" or platform == "linux2":
+    df_street.to_pickle("../BA/street_all.pkl")
+elif platform == "win32" or platform == "win64":
+    df_street.to_pickle("..\\BA\\street_all.pkl")
 print(df_street.head())
 
 print("Process finished --- %s seconds ---" % (time.time() - start_time))
