@@ -2,11 +2,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np 
 from sklearn.preprocessing import StandardScaler
+from sys import platform 
 
-# load satellite data
+# load image data 
 satellite_data_all = pd.read_pickle('satellite_all.pkl')
 satellite_data_night = pd.read_pickle('satellite_all_night.pkl')
-# load street data
 street_data_all = pd.read_pickle('street_all.pkl')
 
 # load water index data
@@ -69,21 +69,35 @@ just_need_satellite['water_index_rnd'] = round_half(just_need_satellite['water_i
 just_need_satellite_night['water_index_rnd'] = round_half(just_need_satellite_night['water_index'])
 just_need_street['water_index_rnd'] = round_half(just_need_street['water_index'])
 
-just_need_satellite.to_pickle("..\\BA\\finish_satellite.pkl")
-just_need_satellite_night.to_pickle("..\\BA\\finish_satellite_night.pkl")
-just_need_street.to_pickle("..\\BA\\finish_street.pkl")
+if platform == "linux" or platform == "linux2":
+    just_need_satellite.to_pickle("../BA/finish_satellite.pkl")
+    just_need_satellite_night.to_pickle("../BA/finish_satellite_night.pkl")
+    just_need_street.to_pickle("../BA/finish_street.pkl")
+elif platform == "win32" or platform == "win64":
+    just_need_satellite.to_pickle("..\\BA\\finish_satellite.pkl")
+    just_need_satellite_night.to_pickle("..\\BA\\finish_satellite_night.pkl")
+    just_need_street.to_pickle("..\\BA\\finish_street.pkl")
 
 # split in DMSP and VIIRS
 satellite_viirs, satellite_dmsp = [x for _, x in just_need_satellite.groupby(just_need_satellite['year'] <= 2011)]
 satellite_n_viirs, satellite_n_dmsp = [x for _, x in just_need_satellite_night.groupby(just_need_satellite_night['year'] <= 2011)]
 street_viirs, street_dmsp = [x for _, x in just_need_street.groupby(just_need_street['year'] <= 2011)]
 
-satellite_viirs.to_pickle("..\\BA\\satellite_viirs.pkl")
-satellite_dmsp.to_pickle("..\\BA\\satellite_dmsp.pkl")
-satellite_n_viirs.to_pickle("..\BA\\\satellite_n_viirs.pkl")
-satellite_n_dmsp.to_pickle("..\\BA\\satellite_n_dmsp.pkl")
-street_viirs.to_pickle("..\\BA\\street_viirs.pkl")
-street_dmsp.to_pickle("..\\BA\\street_dmsp.pkl")
+if platform == "linux" or platform == "linux2":
+    satellite_viirs.to_pickle("../BA/satellite_viirs.pkl")
+    satellite_dmsp.to_pickle("../BA/satellite_dmsp.pkl")
+    satellite_n_viirs.to_pickle("../BA/satellite_n_viirs.pkl")
+    satellite_n_dmsp.to_pickle("../BA/satellite_n_dmsp.pkl")
+    street_viirs.to_pickle("../BA/street_viirs.pkl")
+    street_dmsp.to_pickle("../BA/street_dmsp.pkl")
+
+elif platform == "win32" or platform == "win64":    
+    satellite_viirs.to_pickle("..\\BA\\satellite_viirs.pkl")
+    satellite_dmsp.to_pickle("..\\BA\\satellite_dmsp.pkl")
+    satellite_n_viirs.to_pickle("..\\BA\\satellite_n_viirs.pkl")
+    satellite_n_dmsp.to_pickle("..\\BA\\satellite_n_dmsp.pkl")
+    street_viirs.to_pickle("..\\BA\\street_viirs.pkl")
+    street_dmsp.to_pickle("..\\BA\\street_dmsp.pkl")
 
 
 # combine satellite and street #
@@ -95,8 +109,13 @@ just_need_s_s_6 = just_need_s_s_6.rename(columns={'red_scaled_x': 'red_sat', 'gr
 just_need_s_s_6['water_index_rnd'] = round_half(just_need_s_s_6['water_index'])
 just_need_s_s_6.to_pickle("..\\BA\\finish_s_s_6.pkl")
 s_s_6_viirs, s_s_6_dmsp = [x for _, x in just_need_s_s_6.groupby(just_need_s_s_6['year'] <= 2011)]
-s_s_6_viirs.to_pickle("..\\BA\\s_s_6_viirs.pkl")
-s_s_6_dmsp.to_pickle("..\\BA\\s_s_6_dmsp.pkl")
+
+if platform == "linux" or platform == "linux2":
+    s_s_6_viirs.to_pickle("../BA/s_s_6_viirs.pkl")
+    s_s_6_dmsp.to_pickle("../BA/s_s_6_dmsp.pkl")
+elif platform == "win32" or platform == "win64": 
+    s_s_6_viirs.to_pickle("..\\BA\\s_s_6_viirs.pkl")
+    s_s_6_dmsp.to_pickle("..\\BA\\s_s_6_dmsp.pkl")
 
 
 # combine satellite and street and night#
@@ -108,8 +127,13 @@ just_need_s_s_7 = just_need_s_s_7.rename(columns={'red_scaled_x': 'red_sat', 'gr
 just_need_s_s_7['water_index_rnd'] = round_half(just_need_s_s_7['water_index'])
 just_need_s_s_7.to_pickle("..\\BA\\finish_s_s_7.pkl")
 s_s_7_viirs, s_s_7_dmsp = [x for _, x in just_need_s_s_7.groupby(just_need_s_s_7['year'] <= 2011)]
-s_s_7_viirs.to_pickle("..\\BA\\s_s_7_viirs.pkl")
-s_s_7_dmsp.to_pickle("..\\BA\\s_s_7_dmsp.pkl")
+
+if platform == "linux" or platform == "linux2":
+    s_s_7_viirs.to_pickle("../BA/s_s_7_viirs.pkl")
+    s_s_7_dmsp.to_pickle("../BA/s_s_7_dmsp.pkl")
+elif platform == "win32" or platform == "win64": 
+    s_s_7_viirs.to_pickle("..\\BA\\s_s_7_viirs.pkl")
+    s_s_7_dmsp.to_pickle("..\\BA\\s_s_7_dmsp.pkl")
 
 
 """
