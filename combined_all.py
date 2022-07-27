@@ -78,6 +78,27 @@ elif platform == "win32" or platform == "win64":
     just_need_satellite_night.to_pickle("..\\BA\\finish_satellite_night.pkl")
     just_need_street.to_pickle("..\\BA\\finish_street.pkl")
 
+# country split: 
+just_need_satellite_train = just_need_satellite.loc[just_need_satellite['country'].isin(['AL', 'BD', 'BF', 'BJ', 'BO', 'CD', 'CO', 'CM', 'DR', 'GA', 
+    'GH', 'GN', 'GU','GY', 'HN', 'HT', 'ID', 'JO', 'KE', 'KM', 'LB', 'LS', 'MA', 'MB', 'MD', 'MM', 'MW', 'MZ', 
+    'NG', 'NI', 'NM', 'PE', 'PH', 'SL', 'SN', 'TD', 'TG', 'TJ', 'TZ', 'UG', 'ZM', 'ZW'])]
+just_need_satellite_test = just_need_satellite.loc[just_need_satellite['country'].isin(['AM', 'AO', 'BU', 'CI', 'EG', 'ET', 'KH', 'HY', 'ML', 'NP', 'PK', 'RW', 'SZ'])]   
+if platform == "linux" or platform == "linux2":
+    just_need_satellite_train.to_pickle("../BA/finish_satellite_train.pkl")
+    just_need_satellite_test.to_pickle("../BA/finish_satellite_test.pkl")
+
+elif platform == "win32" or platform == "win64":
+    just_need_satellite_train.to_pickle("..\\BA\\finish_satellite_train.pkl")
+    just_need_satellite_test.to_pickle("..\\BA\\finish_satellite_test.pkl")
+   
+
+"""
+train = dataset.loc[dataset['country'].isin(['AL', 'BD', 'BF', 'BJ', 'BO', 'CD', 'CO', 'CM', 'DR', 'GA', 
+    'GH', 'GN', 'GU','GY', 'HN', 'HT', 'ID', 'JO', 'KE', 'KM', 'LB', 'LS', 'MA', 'MB', 'MD', 'MM', 'MW', 'MZ', 
+    'NG', 'NI', 'NM', 'PE', 'PH', 'SL', 'SN', 'TD', 'TG', 'TJ', 'TZ', 'UG', 'ZM', 'ZW'])]
+test = dataset.oc[dataset['country'].isin(['AM', 'AO', 'BU', 'CI', 'EG', 'ET', 'KH', 'HY', 'ML', 'NP', 'PK', 'RW', 'SZ'])]    
+"""
+
 # split in DMSP and VIIRS
 satellite_viirs, satellite_dmsp = [x for _, x in just_need_satellite.groupby(just_need_satellite['year'] <= 2011)]
 satellite_n_viirs, satellite_n_dmsp = [x for _, x in just_need_satellite_night.groupby(just_need_satellite_night['year'] <= 2011)]
@@ -102,7 +123,6 @@ elif platform == "win32" or platform == "win64":
 
 # combine satellite and street #
 combined_s_s_6 = pd.merge(just_need_satellite, just_need_street, how="inner", on=['DHSID_EA'])
-print(combined_s_s_6.keys)
 just_need_s_s_6 = combined_s_s_6[['DHSID_EA', 'red_scaled_x', 'green_scaled_x', 'blue_scaled_x', 'red_scaled_y', 'green_scaled_y', 'blue_scaled_y', 'year_x', 'water_index_y', 'country_y']]
 just_need_s_s_6 = just_need_s_s_6.rename(columns={'red_scaled_x': 'red_sat', 'green_scaled_x': 'green_sat', 'blue_scaled_x': 'blue_sat', 
 'red_scaled_y': 'red_str', 'green_scaled_y': 'green_str', 'blue_scaled_y': 'blue_str', 'year_x': 'year', 'water_index_y': 'water_index', 'country_y': 'country'})
