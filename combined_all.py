@@ -90,6 +90,19 @@ if platform == "linux" or platform == "linux2":
 elif platform == "win32" or platform == "win64":
     just_need_satellite_train.to_pickle("..\\BA\\finish_satellite_train.pkl")
     just_need_satellite_test.to_pickle("..\\BA\\finish_satellite_test.pkl")
+
+just_need_street_train = just_need_street.loc[just_need_street['country'].isin(['AL', 'BD', 'BF', 'BJ', 'BO', 'CD', 'CO', 'CM', 'DR', 'GA', 
+    'GH', 'GN', 'GU','GY', 'HN', 'HT', 'ID', 'JO', 'KE', 'KM', 'LB', 'LS', 'MA', 'MB', 'MD', 'MM', 'MW', 'MZ', 
+    'NG', 'NI', 'NM', 'PE', 'PH', 'SL', 'SN', 'TD', 'TG', 'TJ', 'TZ', 'UG', 'ZM', 'ZW'])]
+just_need_street_test = just_need_street.loc[just_need_street['country'].isin(['AM', 'AO', 'BU', 'CI', 'EG', 'ET', 'KH', 'HY', 'ML', 'NP', 'PK', 'RW', 'SZ'])]   
+if platform == "linux" or platform == "linux2":
+    just_need_street_train.to_pickle("../BA/finish_street_train.pkl")
+    just_need_street_test.to_pickle("../BA/finish_street_test.pkl")
+
+elif platform == "win32" or platform == "win64":
+    just_need_street_train.to_pickle("..\\BA\\finish_street_train.pkl")
+    just_need_street_test.to_pickle("..\\BA\\finish_street_test.pkl")
+
    
 
 """
@@ -103,6 +116,32 @@ test = dataset.oc[dataset['country'].isin(['AM', 'AO', 'BU', 'CI', 'EG', 'ET', '
 #satellite_viirs, satellite_dmsp = [x for _, x in just_need_satellite.groupby(just_need_satellite['year'] <= 2011)]
 satellite_n_viirs, satellite_n_dmsp = [x for _, x in just_need_satellite_night.groupby(just_need_satellite_night['year'] <= 2011)]
 #street_viirs, street_dmsp = [x for _, x in just_need_street.groupby(just_need_street['year'] <= 2011)]
+
+sat_night_dmsp_train = satellite_n_dmsp.loc[satellite_n_dmsp['country'].isin(['AL', 'BD', 'BF', 'BJ', 'BO', 'CD', 'CO', 'CM', 'DR', 'GA', 
+    'GH', 'GN', 'GU','GY', 'HN', 'HT', 'ID', 'JO', 'KE', 'KM', 'LB', 'LS', 'MA', 'MB', 'MD', 'MM', 'MW', 'MZ', 
+    'NG', 'NI', 'NM', 'PE', 'PH', 'SL', 'SN', 'TD', 'TG', 'TJ', 'TZ', 'UG', 'ZM', 'ZW'])]
+sat_night_dmsp_test = satellite_n_dmsp.loc[satellite_n_dmsp['country'].isin(['AM', 'AO', 'BU', 'CI', 'EG', 'ET', 'KH', 'HY', 'ML', 'NP', 'PK', 'RW', 'SZ'])]   
+if platform == "linux" or platform == "linux2":
+    satellite_n_dmsp_train.to_pickle("../BA/satellite_n_dmsp_train.pkl")
+    satellite_n_dmsp_test.to_pickle("../BA/satellite_n_dmsp_test.pkl")
+
+elif platform == "win32" or platform == "win64":
+    satellite_n_dmsp_train.to_pickle("..\\BA\\satellite_n_dmsp_train.pkl")
+    satellite_n_dmsp_test.to_pickle("..\\BA\\satellite_n_dmsp_test.pkl")
+
+sat_night_viirs_train = satellite_n_viirs.loc[satellite_n_viirs['country'].isin(['AL', 'BD', 'BF', 'BJ', 'BO', 'CD', 'CO', 'CM', 'DR', 'GA', 
+    'GH', 'GN', 'GU','GY', 'HN', 'HT', 'ID', 'JO', 'KE', 'KM', 'LB', 'LS', 'MA', 'MB', 'MD', 'MM', 'MW', 'MZ', 
+    'NG', 'NI', 'NM', 'PE', 'PH', 'SL', 'SN', 'TD', 'TG', 'TJ', 'TZ', 'UG', 'ZM', 'ZW'])]
+sat_night_viirs_test = satellite_n_viirs.loc[satellite_n_viirs['country'].isin(['AM', 'AO', 'BU', 'CI', 'EG', 'ET', 'KH', 'HY', 'ML', 'NP', 'PK', 'RW', 'SZ'])]   
+if platform == "linux" or platform == "linux2":
+    satellite_n_viirs_train.to_pickle("../BA/satellite_n_viirs_train.pkl")
+    satellite_n_viirs_test.to_pickle("../BA/satellite_n_viirs_test.pkl")
+
+elif platform == "win32" or platform == "win64":
+    satellite_n_viirs_train.to_pickle("..\\BA\\satellite_n_viirs_train.pkl")
+    satellite_n_viirs_test.to_pickle("..\\BA\\satellite_n_viirs_test.pkl")    
+    
+    
 
 if platform == "linux" or platform == "linux2":
     #satellite_viirs.to_pickle("../BA/satellite_viirs.pkl")
@@ -127,18 +166,28 @@ just_need_s_s_6 = combined_s_s_6[['DHSID_EA', 'red_scaled_x', 'green_scaled_x', 
 just_need_s_s_6 = just_need_s_s_6.rename(columns={'red_scaled_x': 'red_sat', 'green_scaled_x': 'green_sat', 'blue_scaled_x': 'blue_sat', 
 'red_scaled_y': 'red_str', 'green_scaled_y': 'green_str', 'blue_scaled_y': 'blue_str', 'year_x': 'year', 'water_index_y': 'water_index', 'country_y': 'country'})
 just_need_s_s_6['water_index_rnd'] = round_half(just_need_s_s_6['water_index'])
-s_s_6_viirs, s_s_6_dmsp = [x for _, x in just_need_s_s_6.groupby(just_need_s_s_6['year'] <= 2011)]
+# s_s_6_viirs, s_s_6_dmsp = [x for _, x in just_need_s_s_6.groupby(just_need_s_s_6['year'] <= 2011)]
+
+just_need_s_s_6_train = just_need_s_s_6.loc[just_need_s_s_6['country'].isin(['AL', 'BD', 'BF', 'BJ', 'BO', 'CD', 'CO', 'CM', 'DR', 'GA', 
+    'GH', 'GN', 'GU','GY', 'HN', 'HT', 'ID', 'JO', 'KE', 'KM', 'LB', 'LS', 'MA', 'MB', 'MD', 'MM', 'MW', 'MZ', 
+    'NG', 'NI', 'NM', 'PE', 'PH', 'SL', 'SN', 'TD', 'TG', 'TJ', 'TZ', 'UG', 'ZM', 'ZW'])]
+just_need_s_s_6_test = just_need_s_s_6.loc[just_need_s_s_6['country'].isin(['AM', 'AO', 'BU', 'CI', 'EG', 'ET', 'KH', 'HY', 'ML', 'NP', 'PK', 'RW', 'SZ'])] 
+
 
 if platform == "linux" or platform == "linux2":
-    s_s_6_viirs.to_pickle("../BA/s_s_6_viirs.pkl")
-    s_s_6_dmsp.to_pickle("../BA/s_s_6_dmsp.pkl")
+    #s_s_6_viirs.to_pickle("../BA/s_s_6_viirs.pkl")
+    #s_s_6_dmsp.to_pickle("../BA/s_s_6_dmsp.pkl")
     just_need_s_s_6.to_pickle("../BA/finish_s_s_6.pkl")
+    just_need_s_s_6_train.to_pickle("../BA/s_s_6_train.pkl")
+    just_need_s_s_6_test.to_pickle("../BA/s_s_6_test.pkl")
 elif platform == "win32" or platform == "win64": 
-    s_s_6_viirs.to_pickle("..\\BA\\s_s_6_viirs.pkl")
-    s_s_6_dmsp.to_pickle("..\\BA\\s_s_6_dmsp.pkl")
+    #s_s_6_viirs.to_pickle("..\\BA\\s_s_6_viirs.pkl")
+    #s_s_6_dmsp.to_pickle("..\\BA\\s_s_6_dmsp.pkl")
     just_need_s_s_6.to_pickle("..\\BA\\finish_s_s_6.pkl")
-    
+    just_need_s_s_6_train.to_pickle("..\\BA\\s_s_6_train.pkl")
+    just_need_s_s_6_test.to_pickle("..\\BA\\s_s_6_test.pkl")
 
+    
 
 
 # combine satellite and street and night#
@@ -150,14 +199,32 @@ just_need_s_s_7 = just_need_s_s_7.rename(columns={'red_scaled_x': 'red_sat', 'gr
 just_need_s_s_7['water_index_rnd'] = round_half(just_need_s_s_7['water_index'])
 s_s_7_viirs, s_s_7_dmsp = [x for _, x in just_need_s_s_7.groupby(just_need_s_s_7['year'] <= 2011)]
 
+s_s_7_dmsp_train = s_s_7_dmsp.loc[s_s_7_dmsp['country'].isin(['AL', 'BD', 'BF', 'BJ', 'BO', 'CD', 'CO', 'CM', 'DR', 'GA', 
+    'GH', 'GN', 'GU','GY', 'HN', 'HT', 'ID', 'JO', 'KE', 'KM', 'LB', 'LS', 'MA', 'MB', 'MD', 'MM', 'MW', 'MZ', 
+    'NG', 'NI', 'NM', 'PE', 'PH', 'SL', 'SN', 'TD', 'TG', 'TJ', 'TZ', 'UG', 'ZM', 'ZW'])]
+s_s_7_dmsp_test = s_s_7_dmsp.loc[s_s_7_dmsp['country'].isin(['AM', 'AO', 'BU', 'CI', 'EG', 'ET', 'KH', 'HY', 'ML', 'NP', 'PK', 'RW', 'SZ'])] 
+
+s_s_7_viirs_train = s_s_7_viirs.loc[s_s_7_viirs['country'].isin(['AL', 'BD', 'BF', 'BJ', 'BO', 'CD', 'CO', 'CM', 'DR', 'GA', 
+    'GH', 'GN', 'GU','GY', 'HN', 'HT', 'ID', 'JO', 'KE', 'KM', 'LB', 'LS', 'MA', 'MB', 'MD', 'MM', 'MW', 'MZ', 
+    'NG', 'NI', 'NM', 'PE', 'PH', 'SL', 'SN', 'TD', 'TG', 'TJ', 'TZ', 'UG', 'ZM', 'ZW'])]
+s_s_7_viirs_test = s_s_7_viirs.loc[s_s_7_dmsp['country'].isin(['AM', 'AO', 'BU', 'CI', 'EG', 'ET', 'KH', 'HY', 'ML', 'NP', 'PK', 'RW', 'SZ'])] 
+
 if platform == "linux" or platform == "linux2":
     s_s_7_viirs.to_pickle("../BA/s_s_7_viirs.pkl")
     s_s_7_dmsp.to_pickle("../BA/s_s_7_dmsp.pkl")
     just_need_s_s_7.to_pickle("../BA/finish_s_s_7.pkl")
+    s_s_7_dmsp_train.to_pickle("../BA/s_s_7_dmsp_train.pkl")
+    s_s_7_dmsp_test.to_pickle("../BA/s_s_7_dmsp_test.pkl")
+    s_s_7_viirs_train.to_pickle("../BA/s_s_7_viirs_train.pkl")
+    s_s_7_viirs_test.to_pickle("../BA/s_s_7_viirs_test.pkl")
 elif platform == "win32" or platform == "win64": 
     s_s_7_viirs.to_pickle("..\\BA\\s_s_7_viirs.pkl")
     s_s_7_dmsp.to_pickle("..\\BA\\s_s_7_dmsp.pkl")
     just_need_s_s_7.to_pickle("..\\BA\\finish_s_s_7.pkl")
+    s_s_7_dmsp_train.to_pickle("..\\BA\\s_s_7_dmsp_train.pkl")
+    s_s_7_dmsp_test.to_pickle("..\\BA\\s_s_7_dmsp_test.pkl")
+    s_s_7_viirs_train.to_pickle("..\\BA\\s_s_7_viirs_train.pkl")
+    s_s_7_viirs_test.to_pickle("..\\BA\\s_s_7_viirs_test.pkl")
 
 
 """
