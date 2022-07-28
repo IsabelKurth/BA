@@ -32,7 +32,7 @@ def list_files(dir):
 for item in list_files(folder):
     #list_data = np.load(item, allow_pickle = True)
     #image_data = list_data[list_data.files[0]]
-    item_glob = glob.glob('item/*/*.npz')
+    item_glob = glob.glob('item')
     image_data = np.load(item_glob, allow_pickle=True)['x']
     firstsplit = (os.path.basename(item))
     id = os.path.splitext(firstsplit)[0]
