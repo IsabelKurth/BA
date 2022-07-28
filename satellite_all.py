@@ -30,13 +30,14 @@ def list_files(dir):
 
 
 for item in list_files(folder):
+    try: 
     #list_data = np.load(item, allow_pickle = True)
     #image_data = list_data[list_data.files[0]]
-    image_data = np.load(item, allow_pickle=False)['x']
-    firstsplit = (os.path.basename(item))
-    id = os.path.splitext(firstsplit)[0]
-    country = id[:2]
-    mydict = {
+        image_data = np.load(item, allow_pickle=False)['x']
+        firstsplit = (os.path.basename(item))
+        id = os.path.splitext(firstsplit)[0]
+        country = id[:2]
+        mydict = {
             'DHSID_EA': id, 
             'red':np.mean(image_data[2,:,:]), 
             'green': np.mean(image_data[1,:,:]), 
@@ -45,7 +46,9 @@ for item in list_files(folder):
             'path': item,
             'country': country
         }
-    df_satellite = pd.concat([df_satellite, pd.DataFrame([mydict])], ignore_index = True)
+        df_satellite = pd.concat([df_satellite, pd.DataFrame([mydict])], ignore_index = True)
+    except:
+        print("Error occured for file", item)    
 
 print(df_satellite.head())
 print(df_satellite.keys())
