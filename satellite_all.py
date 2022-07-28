@@ -26,13 +26,13 @@ def list_files(dir):
     return r  
 
 
-print(list_files(folder))    
+#print(list_files(folder))    
 
 
 for item in list_files(folder):
     #list_data = np.load(item, allow_pickle = True)
     #image_data = list_data[list_data.files[0]]
-    image_data = np.load(item, allow_pickle=True)['x']
+    image_data = np.load(item, allow_pickle=False)['x']
     firstsplit = (os.path.basename(item))
     id = os.path.splitext(firstsplit)[0]
     country = id[:2]
