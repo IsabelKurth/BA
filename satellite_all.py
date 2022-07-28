@@ -28,7 +28,7 @@ def list_files(dir):
 
 print(list_files(folder))    
 
-"""
+
 for item in list_files(folder):
     #list_data = np.load(item, allow_pickle = True)
     #image_data = list_data[list_data.files[0]]
@@ -55,4 +55,3 @@ if platform == "linux" or platform == "linux2":
 elif platform == "win32" or platform == "win64":
     df_satellite.to_pickle("..\\BA\\satellite_all.pkl")        
 
-    """
