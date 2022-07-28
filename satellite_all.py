@@ -52,6 +52,7 @@ for item in folder:
     #list_data = np.load(item, allow_pickle = True)
     #image_data = list_data[list_data.files[0]]
     item_glob = glob.glob('item/*.npz')
+    print(item_glob)
     image_data = np.load(item_glob, allow_pickle=True)['x']
     print(item_glob)
     print(image_data)
