@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import npzviewer
 from PIL import Image
-
+"""
 def normalize8(I):
     mn = I.min()
     mx = I.max()
@@ -78,7 +78,7 @@ plt.scatter(X, y, c='green', label='data')
 plt.plot(mse)
 #plt.show()
 
-
+"""
 
 water_data = pd.read_csv('dhs_final_labels.csv')
 water_data = water_data.dropna(subset=['water_index'])
@@ -86,4 +86,11 @@ print(water_data['year'].min())
 print(water_data['year'].max())
 print(water_data['year'].unique())
 
+water_new, water_old = [x for _, x in water_data.groupby(water_data['year'] < 2016)]
+print(water_old.shape)
+print(water_new.shape)
+print(water_data.shape)
+
+old = water_data.loc[water_data['year'] < 2016]
+print(old.shape)
 

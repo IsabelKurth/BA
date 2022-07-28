@@ -12,6 +12,8 @@ finish_satellite_train.pkl
 finish_satellite_test.pkl
 finish_street_test.pkl
 finish_street_train.pkl
+street_new.pkl
+street_old.pkl
 satellite_n_viirs.pkl
 satellite_n_viirs_train.pkl
 satellite_n_viirs_test.pkl
