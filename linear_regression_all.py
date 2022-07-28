@@ -16,17 +16,17 @@ data_satellite_test = pd.read_pickle('finish_satellite_test.pkl')
 
 # street
 data_street = pd.read_pickle('finish_street.pkl')
-data_street_train = pd.read_pickle('finish_street_train.pkl')
-data_street_test = pd.read_pickle('finish_street_test.pkl')
+#data_street_train = pd.read_pickle('finish_street_train.pkl')
+#data_street_test = pd.read_pickle('finish_street_test.pkl')
 
 # night
 data_satellite_night = pd.read_pickle('finish_satellite_night.pkl')
 data_satellite_night_dmsp= pd.read_pickle('satellite_n_dmsp.pkl')
 data_satellite_night_viirs = pd.read_pickle('satellite_n_viirs.pkl')
-data_satellite_night_dmsp_train = pd.read_pickle('satellite_n_dmsp_train.pkl')
-data_satellite_night_dmsp_test = pd.read_pickle('satellite_n_dmsp_test.pkl')
-data_satellite_viirs_dmsp_train = pd.read_pickle('satellite_n_viirs_train.pkl')
-data_satellite_viirs_dmsp_test = pd.read_pickle('satellite_n_viirs_test.pkl')
+#data_satellite_night_dmsp_train = pd.read_pickle('satellite_n_dmsp_train.pkl')
+#data_satellite_night_dmsp_test = pd.read_pickle('satellite_n_dmsp_test.pkl')
+#data_satellite_viirs_dmsp_train = pd.read_pickle('satellite_n_viirs_train.pkl')
+#data_satellite_viirs_dmsp_test = pd.read_pickle('satellite_n_viirs_test.pkl')
 
 # combined 
 data_6 = pd.read_pickle('finish_s_s_6.pkl')
@@ -35,12 +35,12 @@ data_6_dmsp = pd.read_pickle('s_s_6_dmsp.pkl')
 data_6_viirs = pd.read_pickle('s_s_6_viirs.pkl')
 data_7_dmsp = pd.read_pickle('s_s_7_dmsp.pkl')
 data_7_viirs = pd.read_pickle('s_s_7_viirs.pkl')
-data_6_train = pd.read_pickle('s_s_6_train.pkl')
-data_6_test = pd.read_pickle('s_s_6_test.pkl')
-data_7_dmsp_train = pd.read_pickle('s_s_7_dmsp_train.pkl')
-data_7_dmsp_test = pd.read_pickle('s_s_7_dmsp_test.pkl')
-data_7_viirs_train = pd.read_pickle('s_s_7_viirs_train.pkl')
-data_7_viirs_test = pd.read_pickle('s_s_7_viirs_test.pkl')
+#data_6_train = pd.read_pickle('s_s_6_train.pkl')
+#data_6_test = pd.read_pickle('s_s_6_test.pkl')
+#data_7_dmsp_train = pd.read_pickle('s_s_7_dmsp_train.pkl')
+#data_7_dmsp_test = pd.read_pickle('s_s_7_dmsp_test.pkl')
+#data_7_viirs_train = pd.read_pickle('s_s_7_viirs_train.pkl')
+#data_7_viirs_test = pd.read_pickle('s_s_7_viirs_test.pkl')
 
 
 data_street = data_street.iloc[1:,:]
