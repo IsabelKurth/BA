@@ -29,6 +29,7 @@ def list_files(dir):
 
 #print(list_files(folder))    
 
+
 for item in list_files(folder):
     try: 
     #list_data = np.load(item, allow_pickle = True)
@@ -49,30 +50,7 @@ for item in list_files(folder):
         df_satellite = pd.concat([df_satellite, pd.DataFrame([mydict])], ignore_index = True)
     except: 
         print("Error", item )
-"""
 
-for item in folder:
-    #list_data = np.load(item, allow_pickle = True)
-    #image_data = list_data[list_data.files[0]]
-    item_glob = glob.glob('item/*.npz')
-    print(item_glob)
-    image_data = np.load(item_glob, allow_pickle=True)['x']
-    print(item_glob)
-    print(image_data)
-    firstsplit = (os.path.basename(item))
-    id = os.path.splitext(firstsplit)[0]
-    country = id[:2]
-    mydict = {
-            'DHSID_EA': id, 
-            'red':np.mean(image_data[2,:,:]), 
-            'green': np.mean(image_data[1,:,:]), 
-            'blue':np.mean(image_data[0,:,:]),
-            'imagename': firstsplit,
-            'path': item,
-            'country': country
-    }
-    df_satellite = pd.concat([df_satellite, pd.DataFrame([mydict])], ignore_index = True)    
-"""
 
 print(df_satellite.head())
 print(df_satellite.keys())
