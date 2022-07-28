@@ -71,11 +71,11 @@ just_need_street['water_index_rnd'] = round_half(just_need_street['water_index']
 
 if platform == "linux" or platform == "linux2":
     just_need_satellite.to_pickle("../BA/finish_satellite.pkl")
-    just_need_satellite_night.to_pickle("../BA/finish_satellite_night.pkl")
+    #just_need_satellite_night.to_pickle("../BA/finish_satellite_night.pkl")
     just_need_street.to_pickle("../BA/finish_street.pkl")
 elif platform == "win32" or platform == "win64":
     just_need_satellite.to_pickle("..\\BA\\finish_satellite.pkl")
-    just_need_satellite_night.to_pickle("..\\BA\\finish_satellite_night.pkl")
+    #just_need_satellite_night.to_pickle("..\\BA\\finish_satellite_night.pkl")
     just_need_street.to_pickle("..\\BA\\finish_street.pkl")
 
 # country split: 
@@ -212,7 +212,7 @@ s_s_7_viirs_test = s_s_7_viirs.loc[s_s_7_dmsp['country'].isin(['AM', 'AO', 'BU',
 if platform == "linux" or platform == "linux2":
     s_s_7_viirs.to_pickle("../BA/s_s_7_viirs.pkl")
     s_s_7_dmsp.to_pickle("../BA/s_s_7_dmsp.pkl")
-    just_need_s_s_7.to_pickle("../BA/finish_s_s_7.pkl")
+    #just_need_s_s_7.to_pickle("../BA/finish_s_s_7.pkl")
     s_s_7_dmsp_train.to_pickle("../BA/s_s_7_dmsp_train.pkl")
     s_s_7_dmsp_test.to_pickle("../BA/s_s_7_dmsp_test.pkl")
     s_s_7_viirs_train.to_pickle("../BA/s_s_7_viirs_train.pkl")
@@ -220,7 +220,7 @@ if platform == "linux" or platform == "linux2":
 elif platform == "win32" or platform == "win64": 
     s_s_7_viirs.to_pickle("..\\BA\\s_s_7_viirs.pkl")
     s_s_7_dmsp.to_pickle("..\\BA\\s_s_7_dmsp.pkl")
-    just_need_s_s_7.to_pickle("..\\BA\\finish_s_s_7.pkl")
+    #just_need_s_s_7.to_pickle("..\\BA\\finish_s_s_7.pkl")
     s_s_7_dmsp_train.to_pickle("..\\BA\\s_s_7_dmsp_train.pkl")
     s_s_7_dmsp_test.to_pickle("..\\BA\\s_s_7_dmsp_test.pkl")
     s_s_7_viirs_train.to_pickle("..\\BA\\s_s_7_viirs_train.pkl")
