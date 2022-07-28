@@ -68,18 +68,17 @@ def knn_k(dataset, X):
         if r2score > best_r2:
             best_r2 = r2score
             best_k = i
-    return best_k
+
  
     print(best_k)
     plt.figure(figsize=(12,6))
     plt.plot(range(1, 21), error, color='red', linestyle='dashed', marker='o', markerfacecolor='blue', markersize=10)  
     plt.show()  
+    return best_k
 
 
-    #knn_optimal(dataset, X, best_k)  
-
-best_k_found = knn_k(data_satellite_night, data_satellite_night['mean_scaled'].to_numpy().reshape(-1,1))
+best_k_n = knn_k(data_satellite_night, data_satellite_night['mean_scaled'].to_numpy().reshape(-1,1))
 knn_optimal(data_satellite_night, data_satellite_night['mean_scaled'].to_numpy().reshape(-1,1), best_k_found)
 
-knn_k(data_street, data_street.iloc[:,4:7])
-knn_optimal(data_street, data_street.iloc[:,4:7], 2)
+best_k_street = knn_k(data_street, data_street.iloc[:,4:7])
+knn_optimal(data_street, data_street.iloc[:,4:7], best_k_street)
