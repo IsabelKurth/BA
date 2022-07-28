@@ -3,4 +3,7 @@ AL_2017
 DHS_Data
 AM
 Street_images
+street_all.pkl
+satellite_all.pkl
+satellite_all_night.pkl
 
