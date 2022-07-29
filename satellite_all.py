@@ -54,6 +54,7 @@ for item in list_files(folder):
 
 print(df_satellite.head())
 print(df_satellite.keys())
+print(df_satellite.shape)
 
 if platform == "linux" or platform == "linux2":
     df_satellite.to_pickle("../BA/satellite_all.pkl")   
